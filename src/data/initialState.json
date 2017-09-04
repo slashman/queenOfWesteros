@@ -1,0 +1,22 @@
+{
+    "locations": [
+        {
+            "name": "The Reach",
+            "house": {
+                "name": "Tyrell"
+            },
+            "domain": {
+                "name": "Targaryen"
+            },
+            "units": [
+                {
+                    "type": {
+                        "type": "Infantry",
+                        "name": "Unsullied"
+                    },
+                    "q": 5
+                }
+            ]
+        }
+    ]
+}

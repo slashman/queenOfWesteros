@@ -1,5 +1,3 @@
-import { PropTypes } from 'react';
-
 const Units = ({units}) => {
     let log = "hello";
     debugger;
@@ -19,8 +17,5 @@ const Units = ({units}) => {
     )
 };
 
-Units.PropTypes = {
-    units: PropTypes.array
-};
 
 export default Units;

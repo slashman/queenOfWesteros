@@ -1,15 +1,18 @@
-import { PropTypes } from 'react';
 import Units from '../Units/Units.component.js';
 import './Locations.scss';
 
-const Locations = ({ locations }) => {
-    let { name, house, domain, units } = locations[0];
+const Locations = ({ locations = [], currentLocation = 0, onLocationChange=f=>f }) => {
+    let { name, house, domain, units } = locations[currentLocation];
     return (
         <div className="location-view">
             <div className="bar">
-                <button className="left btn">LEFT</button>
+                <button className="left btn"
+                    onClick={onLocationChange(currentLocation, 'decrease')}
+                >LEFT</button>
                 <h2 className="location">{ name }</h2>
-                <button className="right btn">RIGHT</button>
+                <button className="right btn"
+                    onClick={onLocationChange(currentLocation, 'increase')}
+                >RIGHT</button>
             </div>
             <label>Occupied by:</label>
             <div className="owner-data">
