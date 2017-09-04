@@ -13,8 +13,6 @@ export const currentLocation = (state = {}, action) => {
                     : action.index - 1
             }
             return newId;
-        case CONSTANTS.MOVE_UNITS_CONFIRM:
-            return model.getKnownLocationInfo();
         default:
             return state;
     }
@@ -23,6 +21,7 @@ export const currentLocation = (state = {}, action) => {
 export const locations = (state = {}, action) => {
     switch (action.type) {
         case CONSTANTS.MOVE_UNITS_CONFIRM:
+            console.log('Reducing locations');
             return model.getKnownLocationInfo();
         default:
             return state;
@@ -36,7 +35,7 @@ export const view = (state = {}, action) => {
         case CONSTANTS.CANCEL_MOVE_UNITS:
             return CONSTANTS.VIEWS.LOCATIONS;
         case CONSTANTS.MOVE_UNITS_CONFIRM:
-            return CONSTANTS.VIEW.UNITS
+            return CONSTANTS.VIEWS.LOCATIONS
         default:
             return CONSTANTS.VIEWS.LOCATIONS;
 

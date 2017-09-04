@@ -25,6 +25,7 @@ export const ViewHandlerComponent = connect(
                 dispatch(cancelUnitMovements(index));
             },
             onMoveUnitsConfirm(data) {
+                console.log("in dispatch");
                 dispatch(moveUnitsConfirm(data));
             }
         };

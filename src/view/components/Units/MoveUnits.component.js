@@ -20,11 +20,12 @@ export default class MoveUnits extends Component {
             let ref = `ref-${unit.type.id}`;
             return {
                 type: unit.type.id,
-                q: this.refs[ref].value
+                q: parseInt(this.refs[ref].value, 10)
             };
-        });
+        }).filter((item) => item.q > 0);
         data.from = location.id,
         data.to = this.refs.select.value;
+        console.log(data);
         onUnitsMoved(data);
     }
 
