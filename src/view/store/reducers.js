@@ -5,11 +5,11 @@ export const currentLocation = (state = {}, action) => {
         case CONSTANTS.CHANGE_LOCATION:
             let newId = state;
             if (action.movement === 'increase') {
-                newId = (action.id + 1) % action.length;
+                newId = (action.index + 1) % action.length;
             } else if (action.movement === 'decrease') {
-                newId = (action.id - 1) < 0
+                newId = (action.index - 1) < 0
                     ? action.length - 1
-                    : action.id - 1
+                    : action.index - 1
             }
             return newId
         default:
@@ -29,6 +29,8 @@ export const view = (state = {}, action) => {
     switch (action.type) {
         case CONSTANTS.MOVE_UNITS_START:
             return CONSTANTS.VIEWS.UNITS
+        case CONSTANTS.CANCEL_MOVE_UNITS:
+            return CONSTANTS.VIEWS.LOCATIONS;
         default:
             return CONSTANTS.VIEWS.LOCATIONS;
 

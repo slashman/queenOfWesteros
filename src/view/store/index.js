@@ -6,7 +6,7 @@ import CONSTANTS from '../constants.js';
 const initialState = {
     view: CONSTANTS.VIEWS.LOCATIONS,
     locations: model.getKnownLocationInfo(),
-    currentLocation: 0
+    currentLocation: 17
 };
 
 const logger = (store) => (next) => (action) => {

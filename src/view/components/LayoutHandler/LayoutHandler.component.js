@@ -7,12 +7,13 @@ const LayoutHandler = ({
     locations,
     currentLocation,
     onLocationChange,
-    onMoveUnits
+    onMoveUnits,
+    onCancel
 }) => {
     let targetComponent = null;
     switch (view) {
         case CONSTANTS.VIEWS.UNITS:
-            targetComponent = <MoveUnits locations={locations} currentLocation={currentLocation} />
+            targetComponent = <MoveUnits locations={locations} currentLocation={currentLocation} onUnitsMoved={onMoveUnits} onCancel={onCancel} />
             break;
         case CONSTANTS.VIEWS.LOCATIONS:
         default:

@@ -53,11 +53,15 @@ const Locations = ({
                     ? <UnitsList units={location.units} />
                     : null
                 }
-                <button className="action btn"
-                    onClick={move}
-                    >
-                    MOVE UNITS
-                </button>
+                { (location.domain && location.domain.name === 'Targaryen')
+                    ? (
+                        <button className="action btn"
+                            onClick={move}>
+                            MOVE UNITS
+                        </button>
+                    )
+                    : null
+                }
             </div>
         );
     } else {

@@ -1,9 +1,9 @@
 import CONSTANTS from './constants'
 
-export const changeLocation = (id, movement, length) => {
+export const changeLocation = (index, movement, length) => {
     return {
         type: CONSTANTS.CHANGE_LOCATION,
-        id,
+        index,
         movement,
         length
     };
@@ -14,3 +14,9 @@ export const moveUnitsStart = (id) => {
         id
     };
 };
+export const cancelUnitMovements = (index) => {
+    return {
+        type: CONSTANTS.CANCEL_MOVE_UNITS,
+        index
+    };
+}

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { changeLocation, moveUnitsStart } from '../actions';
+import { changeLocation, moveUnitsStart, cancelUnitMovements } from '../actions';
 // import Locations from './Locations/Locations.component.js';
 import LayoutHandler from './LayoutHandler/LayoutHandler.component.js';
 
@@ -13,11 +13,14 @@ export const ViewHandlerComponent = connect(
     },
     (dispatch) => {     //mapDispatchToProps
         return {
-            onLocationChange(id, movement, length) {
-                dispatch(changeLocation(id, movement, length));
+            onLocationChange(index, movement, length) {
+                dispatch(changeLocation(index, movement, length));
             },
             onMoveUnits(id) {
                 dispatch(moveUnitsStart(id));
+            },
+            onCancel(index) {
+                dispatch(cancelUnitMovements(index))
             }
         };
     }
