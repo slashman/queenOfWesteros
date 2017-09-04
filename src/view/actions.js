@@ -1,4 +1,5 @@
-import CONSTANTS from './constants'
+import CONSTANTS from './constants';
+import * as model from '../model/model.js';
 
 export const changeLocation = (index, movement, length) => {
     return {
@@ -22,6 +23,13 @@ export const cancelUnitMovements = (index) => {
 }
 
 export const moveUnitsConfirm = (data) => {
+    let actionData = {
+        type: "MOVE_TROOPS",
+        from: data.from || "DRAGONSTONE",
+        to: data.to || "CASTERLY_ROCK",
+        units: data.units
+    };
+    model.scheduleAction(actionData);
     return {
         type: CONSTANTS.MOVE_UNITS_CONFIRM,
         data

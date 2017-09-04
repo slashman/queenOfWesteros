@@ -39,17 +39,5 @@ module.exports = {
                     }}, "sass-loader"]
             }
         ]
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            "process.env": {
-                NODE_ENV: JSON.stringify("dev")
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            warnings: false,
-            mangle: false
-        })
-    ]
+    }
 };

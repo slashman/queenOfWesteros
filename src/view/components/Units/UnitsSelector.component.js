@@ -4,6 +4,7 @@ import {Component} from 'react';
 export default class UnitSelector extends Component {
     constructor(props) {
         super(props);
+        this.props = props;
     }
 
     render() {
@@ -11,12 +12,7 @@ export default class UnitSelector extends Component {
 
         return (
             <div>
-                {units.map((unit, index) =>
-                    <div className="unit" key={unit.type.id}>
-                        <span className="unit">{unit.type.name}</span>
-                        <input type="text" defaultValue={unit.aq} ref={`ref-${unit.type.id}`} required/>
-                    </div>
-                )}
+                
             </div>
         );
     }

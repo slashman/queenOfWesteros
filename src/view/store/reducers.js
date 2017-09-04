@@ -14,7 +14,7 @@ export const currentLocation = (state = {}, action) => {
             }
             return newId;
         case CONSTANTS.MOVE_UNITS_CONFIRM:
-            return state;
+            return model.getKnownLocationInfo();
         default:
             return state;
     }

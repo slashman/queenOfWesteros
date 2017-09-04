@@ -4,7 +4,7 @@
   "description": "Play as a ruler of westeros",
   "repository": "https://github.com/slashman/queenOfWesteros",
   "scripts": {
-    "watch": "./node_modules/.bin/webpack --progress --colors --watch",
+    "watch": "./node_modules/.bin/webpack --progress --colors --watch --display-error-details",
     "start": "./node_modules/.bin/httpster -p 3000 -d ./dist"
   },
   "license": "MIT",

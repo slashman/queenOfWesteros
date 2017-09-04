@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { changeLocation, moveUnitsStart, cancelUnitMovements, moveUnitsConfirm } from '../actions';
 // import Locations from './Locations/Locations.component.js';
 import LayoutHandler from './LayoutHandler/LayoutHandler.component.js';
+
 
 export const ViewHandlerComponent = connect(
     ({view, locations, currentLocation}) => {
@@ -28,22 +30,3 @@ export const ViewHandlerComponent = connect(
         };
     }
 )(LayoutHandler);
-
-// export const LocationsComponent = connect(
-//     ({locations, currentLocation}) => { //mapStateToProps
-//         return {
-//             locations: [...locations],
-//             currentLocation
-//         }
-//     },
-//     (dispatch) => {     //mapDispatchToProps
-//         return {
-//             onLocationChange(id, movement, length) {
-//                 dispatch(changeLocation(id, movement, length));
-//             },
-//             onMoveUnits(id) {
-//                 dispatch(moveUnitsStart(id));
-//             }
-//         };
-//     }
-// )(Locations);
