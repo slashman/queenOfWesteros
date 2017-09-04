@@ -291,7 +291,7 @@ module.exports = {
 			},
 			{
 				type: UNIT_TYPES.SHIP,
-				q: 100
+				q: 5
 			}
 		]
 	},
@@ -321,4 +321,18 @@ module.exports = {
 			}
 		]
 	},
+	OLDTOWN: {
+		house: HOUSES_MAP.HIGHTOWER,
+		domain: HOUSES_MAP.TARGARYEN,
+		units: [
+			{
+				type: UNIT_TYPES.INFANTRY,
+				q: 9000
+			},
+			{
+				type: UNIT_TYPES.SHIP,
+				q: 100
+			}
+		]
+	}
 };
