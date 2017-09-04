@@ -38,9 +38,9 @@ export const view = (state = {}, action) => {
             return CONSTANTS.VIEWS.LOCATIONS;
         case CONSTANTS.NEXT_DAY:
             return CONSTANTS.VIEWS.SUMMARY;
+        case CONSTANTS.END_TICK:
         default:
             return CONSTANTS.VIEWS.LOCATIONS;
-
     }
 }
 

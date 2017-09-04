@@ -43,3 +43,9 @@ export const nextDay = () => {
         results
     };
 };
+
+export const endTick = () => {
+    return {
+        type: CONSTANTS.END_TICK
+    }
+}
