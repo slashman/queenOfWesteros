@@ -71,3 +71,7 @@ let occupyDreadfort = {
 const dreadfortPlan = model.planAction(occupyDreadfort);
 
 assert("Occupy Dreadfort", dreadfortPlan.planDescription);
+
+// Test 6
+model.scheduleAction(attackCasterlyRock);
+assert(2, model.getScheduledActions().length);
