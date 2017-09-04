@@ -7,7 +7,7 @@ module.exports = {
         folder + "/src/view/index.js"
     ],
     output: {
-        path: folder + "dist/assets",
+        path: folder + "/dist/assets",
         filename: "bundle.js",
         sourceMapFilename: "bundle.map"
     },
