@@ -35,3 +35,11 @@ export const moveUnitsConfirm = (data) => {
         data
     }
 };
+
+export const nextDay = () => {
+    let results = model.simulateDay();
+    return {
+        type: CONSTANTS.NEXT_DAY,
+        results
+    };
+};

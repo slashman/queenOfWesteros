@@ -1,12 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { currentLocation, locations, view } from './reducers.js';
+import { currentLocation, locations, view, actionResults } from './reducers.js';
 import * as model from '../../model/model.js';
 import CONSTANTS from '../constants.js';
 
 const initialState = {
     view: CONSTANTS.VIEWS.LOCATIONS,
     locations: model.getKnownLocationInfo(),
-    currentLocation: 17
+    currentLocation: 17,
+    actionResults: []
 };
 
 const logger = (store) => (next) => (action) => {
@@ -22,7 +23,7 @@ const logger = (store) => (next) => (action) => {
 
 const storeFactory = (state = initialState) =>
     applyMiddleware(logger)(createStore)(
-        combineReducers({view, locations, currentLocation}),
+        combineReducers({view, locations, currentLocation, actionResults}),
         initialState
     )
 

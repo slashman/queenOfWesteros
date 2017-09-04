@@ -1,5 +1,6 @@
 import Locations from '../Locations/Locations.component.js';
 import MoveUnits from '../Units/MoveUnits.component.js';
+import ActionsSummary from '../ActionsSummary/ActionsSummary.component.js';
 import CONSTANTS from '../../constants.js';
 
 const LayoutHandler = ({
@@ -9,16 +10,20 @@ const LayoutHandler = ({
     onLocationChange,
     onMoveUnits,
     onMoveUnitsConfirm,
-    onCancel
+    onCancel,
+    doNextDay,
+    actionResults
 }) => {
     let targetComponent = null;
     switch (view) {
+        case CONSTANTS.VIEWS.SUMMARY:
+            targetComponent = <ActionsSummary actions={actionResults} />
         case CONSTANTS.VIEWS.UNITS:
             targetComponent = <MoveUnits locations={locations} currentLocation={currentLocation} onCancel={onCancel} onUnitsMoved={onMoveUnitsConfirm} />
             break;
         case CONSTANTS.VIEWS.LOCATIONS:
         default:
-            targetComponent = <Locations locations={locations} currentLocation={currentLocation} onLocationChange={onLocationChange} onMoveUnits={onMoveUnits} />
+            targetComponent = <Locations locations={locations} currentLocation={currentLocation} onLocationChange={onLocationChange} onMoveUnits={onMoveUnits} doNextDay={doNextDay} />
             break;
     }
     return targetComponent;

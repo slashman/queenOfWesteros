@@ -5,7 +5,8 @@ const Locations = ({
     locations = [],
     currentLocation,
     onLocationChange = (f) => f,
-    onMoveUnits = (f) => f
+    onMoveUnits = (f) => f,
+    doNextDay = (f) => f
 }) => {
     let location = locations[currentLocation];
 
@@ -23,6 +24,11 @@ const Locations = ({
         event.preventDefault();
         onMoveUnits(location.id)
     };
+
+    const nextDay = (event) => {
+        event.preventDefault();
+        doNextDay();
+    }
 
     if (location) {
         let {name} = location;
@@ -62,11 +68,15 @@ const Locations = ({
                     )
                     : null
                 }
+                <button className="action btn"
+                    onClick={nextDay}>
+                        NEXT DAY
+                </button>
             </div>
         );
     } else {
         return null;
     }
-}
+};
 
 export default Locations;

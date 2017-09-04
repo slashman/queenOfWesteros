@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeLocation, moveUnitsStart, cancelUnitMovements, moveUnitsConfirm } from '../actions';
-// import Locations from './Locations/Locations.component.js';
+import { changeLocation, moveUnitsStart, cancelUnitMovements, moveUnitsConfirm, nextDay } from '../actions';
 import LayoutHandler from './LayoutHandler/LayoutHandler.component.js';
 
 
 export const ViewHandlerComponent = connect(
-    ({view, locations, currentLocation}) => {
+    ({view, locations, currentLocation, actionResults}) => {
         return {
             view,
             locations: [...locations],
-            currentLocation
+            currentLocation,
+            actionResults: [...actionResults]
         }
     },
     (dispatch) => {     //mapDispatchToProps
@@ -25,8 +25,10 @@ export const ViewHandlerComponent = connect(
                 dispatch(cancelUnitMovements(index));
             },
             onMoveUnitsConfirm(data) {
-                console.log("in dispatch");
                 dispatch(moveUnitsConfirm(data));
+            },
+            doNextDay() {
+                dispatch(nextDay())
             }
         };
     }

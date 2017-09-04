@@ -1,12 +1,9 @@
 import {Component} from 'react';
-// import UnitsSelector from './UnitsSelector.component.js';
 
 export default class MoveUnits extends Component {
     constructor(props) {
         super(props);
         this.props = props;
-        // this.moveUnits = this.moveUnits.bind(this);
-        // this.cancel = this.cancel.bind(this)
     }
 
     moveUnits(event) {

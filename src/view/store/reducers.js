@@ -35,9 +35,20 @@ export const view = (state = {}, action) => {
         case CONSTANTS.CANCEL_MOVE_UNITS:
             return CONSTANTS.VIEWS.LOCATIONS;
         case CONSTANTS.MOVE_UNITS_CONFIRM:
-            return CONSTANTS.VIEWS.LOCATIONS
+            return CONSTANTS.VIEWS.LOCATIONS;
+        case CONSTANTS.NEXT_DAY:
+            return CONSTANTS.VIEWS.SUMMARY;
         default:
             return CONSTANTS.VIEWS.LOCATIONS;
 
+    }
+}
+
+export const actionResults = (state = [], action) => {
+    switch (action.type) {
+        case CONSTANTS.NEXT_DAY:
+            return [...action.results];
+        default:
+            return state;
     }
 }
