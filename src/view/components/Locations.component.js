@@ -1,4 +1,5 @@
-import { PropTypes } from 'react'
+import { PropTypes } from 'react';
+import Units from './Units.component.js';
 
 const Locations = ({ locations }) => {
     let { name, house, domain, units } = locations[0];
@@ -11,21 +12,10 @@ const Locations = ({ locations }) => {
             </div>
             <label>Occupied by>:</label>
             <div className="owner-data">
-                <span className="house">{ house }</span>
-                <span className="domain">{ domain }</span>
+                <span className="house">{ house.name }</span>
+                <span className="domain">{ domain.name }</span>
             </div>
-            <ul className="units">
-                units.map(({type, quantity}) =>
-                    <li className="unit">
-                        <span className="unit-type">
-                            {type}
-                        </span>
-                        <span className="unit-quantity">
-                            {quantity}
-                        </span>
-                    </li>
-                )
-            </ul>
+            <Units units={units} />
         </div>
     );
 }

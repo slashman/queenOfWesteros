@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component } from 'react';
 import Locations from './Locations.component.js';
 
 export default class App extends Component {
@@ -7,10 +7,13 @@ export default class App extends Component {
         this.state = {
             locations : [{
                 name: 'The Reach',
-                house: 'Tyrell',
-                domain: 'Targaryen',
+                house: {name: 'Tyrell'},
+                domain: {name: 'Targaryen'},
                 units: [
-                    { type: 'cavalry', quantity: 5}
+                    { type: {
+                        name: 'Cavalry',
+                        type: 'Cavalry'
+                    }, q: 5}
                 ]
             }]
         };
@@ -19,7 +22,7 @@ export default class App extends Component {
     render() {
         const { locations } = this.state;
         return (
-            <Locations {...locations} />
+            <Locations locations={locations} />
         );
     }
 }

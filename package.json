@@ -1,12 +1,11 @@
 {
-  "name": "Queen of Westeros",
+  "name": "QueenOfWesteros",
   "version": "1.0.0",
   "description": "Play as a ruler of westeros",
   "repository": "https://github.com/slashman/queenOfWesteros",
   "scripts": {
-    "build": "./node_modules/.bin/webpack --progress",
-    "prestart": "npm run build",
-    "start": "open http://localhost:3000 & ./node_modules/.bin/httpster -p 3000 -d ./dist"
+    "watch": "./node_modules/.bin/webpack --progress --colors --watch",
+    "start": "./node_modules/.bin/httpster -p 3000 -d ./dist"
   },
   "license": "MIT",
   "devDependencies": {
