@@ -26,6 +26,10 @@ const UNIT_TYPES = {
 		name: "Raider",
 		type: "Infantry"
 	},
+	BARBARIAN: {
+		name: "Barbarian",
+		type: "Infantry"
+	},
 	INFANTRY: {
 		name: "Infantry",
 		type: "Infantry"
@@ -44,6 +48,10 @@ const UNIT_TYPES = {
 	},
 	SHIP: {
 		name: "Ship",
+		type: "Ship"
+	},
+	WAR_LONGSHIP: {
+		name: "War longship",
 		type: "Ship"
 	}
 };
