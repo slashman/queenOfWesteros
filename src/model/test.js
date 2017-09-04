@@ -30,6 +30,9 @@ let attackCasterlyRock = {
 const result = model.planAction(attackCasterlyRock);
 
 assert("Attack Lannister troops", result.planDescription);
+assert(24, result.days);
+
+// Test 3
 
 model.scheduleAction(attackCasterlyRock);
 
@@ -39,3 +42,18 @@ assert(8000, knownInfo.find(l=>l.id==="DRAGONSTONE").units.find(u=>u.type.id==="
 assert(49000, knownInfo.find(l=>l.id==="DRAGONSTONE").units.find(u=>u.type.id==="SCREAMER").aq);
 assert(50000, knownInfo.find(l=>l.id==="DRAGONSTONE").units.find(u=>u.type.id==="SCREAMER").q);
 
+
+// Test 4
+let moveToDorne = {
+	type: "MOVE_TROOPS",
+	from: "DRAGONSTONE",
+	to: "SUNSPEAR",
+	units: [
+		{type: "RAIDER", q: 100}
+	]
+};
+
+const dornePlan = model.planAction(moveToDorne);
+
+assert("Merge with Martell troops", dornePlan.planDescription);
+assert(20, dornePlan.days);

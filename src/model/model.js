@@ -26,6 +26,7 @@ module.exports = {
 			this.getKnownLocationInfo();
 		}
 		const destination = knownInfo.find((l)=>l.id === a.to);
+		const origin = knownInfo.find((l)=>l.id === a.from);
 		let planDescription = false;
 		if (destination.domain && destination.domain.id === playerDomainId){
 			planDescription = "Merge with "+destination.house.name+" troops";
@@ -34,7 +35,7 @@ module.exports = {
 		} else {
 			planDescription = "Occupy "+destination.name;
 		}
-		const days = 5;
+		const days = Math.ceil((Math.abs(destination.x-origin.x)+Math.abs(destination.y-origin.y))/25);
 		return {
 			planDescription: planDescription,
 			days: days

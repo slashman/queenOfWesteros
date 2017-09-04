@@ -1,13 +1,13 @@
 /* jshint node: true */
 "use strict";
 
-const HOUSES_MAP = require('./houses').map;
+const HOUSES = require('./houses');
 const UNIT_TYPES = require('./unitTypes');
 
 module.exports = {
 	DRAGONSTONE: {
-		house: HOUSES_MAP.TARGARYEN,
-		domain: HOUSES_MAP.TARGARYEN,
+		house: HOUSES.TARGARYEN,
+		domain: HOUSES.TARGARYEN,
 		units: [
 			{
 				type: UNIT_TYPES.DROGON,
@@ -40,8 +40,8 @@ module.exports = {
 		]
 	},
 	KINGS_LANDING: {
-		house: HOUSES_MAP.LANNISTER,
-		domain: HOUSES_MAP.LANNISTER,
+		house: HOUSES.LANNISTER,
+		domain: HOUSES.LANNISTER,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -66,8 +66,8 @@ module.exports = {
 		]
 	},
 	THE_EYRIE: {
-		house: HOUSES_MAP.ARRYN,
-		domain: HOUSES_MAP.STARK,
+		house: HOUSES.ARRYN,
+		domain: HOUSES.STARK,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -92,8 +92,8 @@ module.exports = {
 		]
 	},
 	RIVERRUN: {
-		house: HOUSES_MAP.FREY,
-		domain: HOUSES_MAP.LANNISTER,
+		house: HOUSES.FREY,
+		domain: HOUSES.LANNISTER,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -118,8 +118,8 @@ module.exports = {
 		]
 	},
 	TWINS: {
-		house: HOUSES_MAP.FREY,
-		domain: HOUSES_MAP.LANNISTER,
+		house: HOUSES.FREY,
+		domain: HOUSES.LANNISTER,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -144,8 +144,8 @@ module.exports = {
 		]
 	},
 	WHITE_HARBOR: {
-		house: HOUSES_MAP.MANDERLY,
-		domain: HOUSES_MAP.STARK,
+		house: HOUSES.MANDERLY,
+		domain: HOUSES.STARK,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -170,8 +170,8 @@ module.exports = {
 		]
 	},
 	WINTERFELL: {
-		house: HOUSES_MAP.STARK,
-		domain: HOUSES_MAP.STARK,
+		house: HOUSES.STARK,
+		domain: HOUSES.STARK,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -200,8 +200,8 @@ module.exports = {
 		]
 	},
 	CASTLE_BLACK: {
-		house: HOUSES_MAP.NIGHTWATCH,
-		domain: HOUSES_MAP.STARK,
+		house: HOUSES.NIGHTWATCH,
+		domain: HOUSES.STARK,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -218,8 +218,8 @@ module.exports = {
 		]
 	},
 	PYKE: {
-		house: HOUSES_MAP.GREYJOY,
-		domain: HOUSES_MAP.LANNISTER,
+		house: HOUSES.GREYJOY,
+		domain: HOUSES.LANNISTER,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -244,8 +244,8 @@ module.exports = {
 		]
 	},
 	CASTERLY_ROCK: {
-		house: HOUSES_MAP.LANNISTER,
-		domain: HOUSES_MAP.LANNISTER,
+		house: HOUSES.LANNISTER,
+		domain: HOUSES.LANNISTER,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -270,8 +270,8 @@ module.exports = {
 		]
 	},
 	HIGHGARDEN: {
-		house: HOUSES_MAP.TYRELL,
-		domain: HOUSES_MAP.TARGARYEN,
+		house: HOUSES.TYRELL,
+		domain: HOUSES.TARGARYEN,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -296,8 +296,8 @@ module.exports = {
 		]
 	},
 	SUNSPEAR: {
-		house: HOUSES_MAP.MARTELL,
-		domain: HOUSES_MAP.TARGARYEN,
+		house: HOUSES.MARTELL,
+		domain: HOUSES.TARGARYEN,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
@@ -322,8 +322,8 @@ module.exports = {
 		]
 	},
 	OLDTOWN: {
-		house: HOUSES_MAP.HIGHTOWER,
-		domain: HOUSES_MAP.TARGARYEN,
+		house: HOUSES.HIGHTOWER,
+		domain: HOUSES.TARGARYEN,
 		units: [
 			{
 				type: UNIT_TYPES.INFANTRY,
