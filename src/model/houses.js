@@ -31,6 +31,9 @@ const HOUSES = {
 	},
 	MARTELL: {
 		name: "Martell"
+	},
+	HIGHTOWER: {
+		name: "Hightower"
 	}
 };
 
