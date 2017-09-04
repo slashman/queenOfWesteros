@@ -8,7 +8,7 @@ const MoveUnits = ({
 }) => {
     const moveUnits = (event) => {
         event.preventDefault();
-
+        console.log('move');
     };
 
     const cancel = (event) => {

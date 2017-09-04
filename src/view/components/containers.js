@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { changeLocation, moveUnitsStart, cancelUnitMovements } from '../actions';
+import { changeLocation, moveUnitsStart, cancelUnitMovements, moveUnitsConfirm } from '../actions';
 // import Locations from './Locations/Locations.component.js';
 import LayoutHandler from './LayoutHandler/LayoutHandler.component.js';
 
@@ -20,7 +20,10 @@ export const ViewHandlerComponent = connect(
                 dispatch(moveUnitsStart(id));
             },
             onCancel(index) {
-                dispatch(cancelUnitMovements(index))
+                dispatch(cancelUnitMovements(index));
+            },
+            onMoveUnitsConfirm(data) {
+                dispatch(moveUnitsConfirm(data));
             }
         };
     }

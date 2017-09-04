@@ -20,3 +20,10 @@ export const cancelUnitMovements = (index) => {
         index
     };
 }
+
+export const moveUnitsConfirm = (data) => {
+    return {
+        type: CONSTANTS.MOVE_UNITS_CONFIRM,
+        data
+    }
+};

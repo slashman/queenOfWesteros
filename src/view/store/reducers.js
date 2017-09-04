@@ -1,4 +1,5 @@
 import CONSTANTS from '../constants.js';
+import * as model from '../../model/model.js';
 
 export const currentLocation = (state = {}, action) => {
     switch (action.type) {
@@ -11,7 +12,9 @@ export const currentLocation = (state = {}, action) => {
                     ? action.length - 1
                     : action.index - 1
             }
-            return newId
+            return newId;
+        case CONSTANTS.MOVE_UNITS_CONFIRM:
+            return state;
         default:
             return state;
     }
@@ -19,9 +22,10 @@ export const currentLocation = (state = {}, action) => {
 
 export const locations = (state = {}, action) => {
     switch (action.type) {
+        case CONSTANTS.MOVE_UNITS_CONFIRM:
+            return model.getKnownLocationInfo();
         default:
             return state;
-
     }
 }
 
@@ -31,6 +35,8 @@ export const view = (state = {}, action) => {
             return CONSTANTS.VIEWS.UNITS
         case CONSTANTS.CANCEL_MOVE_UNITS:
             return CONSTANTS.VIEWS.LOCATIONS;
+        case CONSTANTS.MOVE_UNITS_CONFIRM:
+            return CONSTANTS.VIEW.UNITS
         default:
             return CONSTANTS.VIEWS.LOCATIONS;
 
