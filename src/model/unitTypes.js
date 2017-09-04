@@ -56,4 +56,8 @@ const UNIT_TYPES = {
 	}
 };
 
+for (let key in UNIT_TYPES){
+	UNIT_TYPES[key].id = key;
+}
+
 module.exports = UNIT_TYPES;
