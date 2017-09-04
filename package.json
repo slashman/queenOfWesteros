@@ -1,0 +1,19 @@
+{
+  "name": "Queen of Westeros",
+  "version": "1.0.0",
+  "description": "Play as a ruler of westeros",
+  "repository": "https://github.com/slashman/queenOfWesteros",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "webpack": "^3.5.5"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
