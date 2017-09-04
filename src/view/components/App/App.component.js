@@ -1,9 +1,13 @@
 import { Component } from 'react';
-import {LocationsComponent} from '../containers.js';
+import { ViewHandlerComponent } from '../containers.js';
+// import {LocationsComponent} from '../containers.js';
 
 const App = () => {
+    // return (
+    //     <LocationsComponent />
+    // );
     return (
-        <LocationsComponent />
+        <ViewHandlerComponent />
     );
 }
 

@@ -24,3 +24,13 @@ export const locations = (state = {}, action) => {
 
     }
 }
+
+export const view = (state = {}, action) => {
+    switch (action.type) {
+        case CONSTANTS.MOVE_UNITS_START:
+            return CONSTANTS.VIEWS.UNITS
+        default:
+            return CONSTANTS.VIEWS.LOCATIONS;
+
+    }
+}

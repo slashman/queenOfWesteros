@@ -1,7 +1,13 @@
-import Units from '../Units/Units.component.js';
+import UnitsList from '../Units/UnitsList.component.js';
 import './Locations.scss';
 
-const Locations = ({ locations = [], currentLocation, onLocationChange=f=>f }) => {
+const Locations = ({
+    locations = [],
+    currentLocation,
+    onLocationChange = (f) => f,
+    onMoveUnits = (f) => f
+}) => {
+    let location = locations[currentLocation];
 
     const prev = (event) => {
         event.preventDefault();
@@ -13,7 +19,11 @@ const Locations = ({ locations = [], currentLocation, onLocationChange=f=>f }) =
         onLocationChange(currentLocation, 'increase', locations.length);
     };
 
-    let location = locations[currentLocation];
+    const move = (event) => {
+        event.preventDefault();
+        onMoveUnits(location.id)
+    };
+
     if (location) {
         let {name} = location;
         return (
@@ -40,9 +50,14 @@ const Locations = ({ locations = [], currentLocation, onLocationChange=f=>f }) =
                     : null
                 }
                 { (location.units && location.units.length > 0)
-                    ? <Units units={location.units} />
+                    ? <UnitsList units={location.units} />
                     : null
                 }
+                <button className="action btn"
+                    onClick={move}
+                    >
+                    MOVE UNITS
+                </button>
             </div>
         );
     } else {

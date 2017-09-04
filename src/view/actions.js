@@ -8,9 +8,9 @@ export const changeLocation = (id, movement, length) => {
         length
     };
 }
-export const viewLocation = (id) => {
+export const moveUnitsStart = (id) => {
     return {
-        type: CONSTANTS.VIEW_LOCATION,
+        type: CONSTANTS.MOVE_UNITS_START,
         id
     };
 };
