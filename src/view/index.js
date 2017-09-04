@@ -4,19 +4,19 @@ import { Provider } from 'react-redux'
 import App from './components/App/App.component.js';
 import storeFactory from './store';
 
-// const store = storeFactory();
+const store = storeFactory();
 
 window.React = React;
-// window.store = store;
-
-// render(
-//     <Provider store={store}>
-//         <App />
-//     </Provider>,
-//     document.getElementById('react-container')
-// );
+window.store = store;
 
 render(
-    <App />,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById('react-container')
-)
+);
+
+// render(
+//     <App />,
+//     document.getElementById('react-container')
+// )
