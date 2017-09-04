@@ -1,53 +1,41 @@
 /* jshint node: true */
 "use strict";
 
-const HOUSES = [
-	{
+const HOUSES = {
+	TARGARYEN: {
 		name: "Targaryen"
 	},
-	{
+	LANNISTER: {
 		name: "Lannister"
 	},
-	{
+	STARK: {
 		name: "Stark"
 	},
-	{
+	FREY: {
 		name: "Frey"
 	},
-	{
+	ARRYN: {
 		name: "Arryn"
 	},
-	{
+	MANDERLY: {
 		name: "Manderly"
 	},
-	{
+	NIGHTWATCH: {
 		name: "The Night's Watch"
 	},
-	{
+	GREYJOY: {
 		name: "Greyjoy"
 	},
-	{
+	TYRELL: {
 		name: "Tyrell"
 	},
-	{
+	MARTELL: {
 		name: "Martell"
 	}
-];
-
-const HOUSES_MAP = {
-	TARGARYEN: HOUSES.find((h)=>h.name === "Targaryen"),
-	LANNISTER: HOUSES.find((h)=>h.name === "Lannister"),
-	STARK: HOUSES.find((h)=>h.name === "Stark"),
-	FREY: HOUSES.find((h)=>h.name === "Frey"),
-	ARRYN: HOUSES.find((h)=>h.name === "Arryn"),
-	MANDERLY: HOUSES.find((h)=>h.name === "Arryn"),
-	NIGHTWATCH: HOUSES.find((h)=>h.name === "The Night's Watch"),
-	GREYJOY: HOUSES.find((h)=>h.name === "Greyjoy"),
-	TYRELL: HOUSES.find((h)=>h.name === "Tyrell"),
-	MARTELL: HOUSES.find((h)=>h.name === "Martell"),
 };
 
-module.exports = {
-	list: HOUSES,
-	map: HOUSES_MAP
-};
+for (let key in HOUSES){
+	HOUSES[key].id = key;
+}
+
+module.exports = HOUSES;
