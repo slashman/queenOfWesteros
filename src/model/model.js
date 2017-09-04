@@ -18,6 +18,8 @@ module.exports = {
 	},
 	getKnownLocationInfo: function(){
 		//TODO: In the future, calculate "known info" based on previously known info+spies
+		if (!knownInfo)
+			this.startDay();
 		return knownInfo;
 	},
 	planAction: function(a){
