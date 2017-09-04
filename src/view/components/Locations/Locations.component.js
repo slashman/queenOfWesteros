@@ -37,7 +37,7 @@ const Locations = ({
                         onClick={next}
                     >RIGHT</button>
                 </div>
-                {(location.house && location.domain)
+                {(location.house || location.domain)
                     ? (
                         <div>
                             <label>Occupied by:</label>
