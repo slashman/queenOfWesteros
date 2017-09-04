@@ -1,7 +1,7 @@
 /* jshint node: true */
 "use strict";
 
-const model = require('./model');
+const model = require('../model');
 
 function assert(expected, actual){
 	if (expected != actual){
