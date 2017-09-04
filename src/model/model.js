@@ -4,13 +4,16 @@
 const LOCATIONS = require('./locations');
 const REAL_INFO = require('./startingStatus'); 
 const UNIT_TYPES = require('./unitTypes');
+const HOUSES = require('./houses');
+const combat = require('./combat');
+const rand = require('./rand');
 
 let knownInfo = false;
-const scheduledActions = [];
-const playerDomainId = "TARGARYEN";
+let scheduledActions = [];
+const playerHouse = HOUSES.TARGARYEN;
 const ACTION_TYPES = ["MOVE_TROOPS"];
 
-module.exports = {
+const model = {
 	startDay: function(){
 		knownInfo = LOCATIONS.map((l)=>Object.assign({}, l, REAL_INFO[l.id]));
 		// All units are available by default
@@ -30,7 +33,7 @@ module.exports = {
 		const destination = knownInfo.find((l)=>l.id === a.to);
 		const origin = knownInfo.find((l)=>l.id === a.from);
 		let planDescription = false;
-		if (destination.domain && destination.domain.id === playerDomainId){
+		if (destination.domain && destination.domain.id === playerHouse.id){
 			planDescription = "Merge with "+destination.house.name+" troops";
 		} else if (destination.house){
 			planDescription = "Attack "+destination.house.name+" troops";
@@ -41,14 +44,16 @@ module.exports = {
 		return {
 			planDescription: planDescription,
 			days: days
-		}
+		};
 	},
 	scheduleAction: function(a){
-		this.validateAction(a);
+		a = Object.assign({}, a, this.planAction(a));
+		a.pendingDays = a.days;
 		scheduledActions.push(a);
 		// Reduce amount of available troops
 		const location = knownInfo.find((l)=>l.id===a.from);
 		a.units.forEach(au=>location.units.forEach(lu => lu.type.id == au.type ? lu.aq -= au.q : false));
+		a.totalUnits = a.units.reduce((s,u)=>s+u.q, 0);
 	},
 	validateAction: function(a){
 		/*
@@ -74,14 +79,57 @@ module.exports = {
 			validate(typeof u.type, 'string');
 			validate(typeof u.q, 'number');
 			validateNot(UNIT_TYPES[u.type], undefined, "Invalid unit type: ["+u.type+"]");
-		})
-		
+		});
 	},
 	getScheduledActions: function(){
 		return scheduledActions;
+	},
+	simulateDay: function(){
+		const actions = [];
+		// Execute all scheduled actions
+		scheduledActions.forEach(a=>{
+			const destination = knownInfo.find((l)=>l.id === a.to);
+			if (a.pendingDays === 0){
+				// Let's try to land here!
+				if (destination.domain && destination.domain.id === playerHouse.id){
+					destination.units = destination.units.concat(a.units.map(u => ({q: u.q, type: UNIT_TYPES[u.type]})));
+					actions.push("Our "+a.totalUnits+" soldiers reached "+destination.name+" and merged with "+destination.house.name+" troops");
+					a.toRemove = true;
+				} else if (destination.house){
+					let outcome = combat.attack(a, actions);
+					if (outcome === 'win'){
+						this.occupy(a);
+						a.toRemove = true;
+					} else if (outcome === 'lose'){
+						a.toRemove = true;
+					}
+				} else {
+					actions.push("Our "+a.totalUnits+" soldiers reached and occupied "+destination.name);
+					this.occupy(a);
+					a.toRemove = true;
+				}
+			} else {
+				a.pendingDays --;
+				actions.push("Our "+a.totalUnits+" soldiers will reach "+destination.name+" in "+a.pendingDays+" days");
+			}
+		});
+		scheduledActions = scheduledActions.filter(a=>!a.toRemove);
+		return actions;
+	},
+	occupy: function(a){
+		const destination = knownInfo.find((l)=>l.id === a.to);
+		destination.units = a.units.map(u => ({q: u.q, type: UNIT_TYPES[u.type]}));
+		destination.domain = playerHouse;
+		destination.house = playerHouse;
+	},
+	inject: function(rand){
+		combat.inject(this, rand);
 	}
-
 };
+
+combat.inject(model, rand);
+
+module.exports = model;
 
 function validate(actual, expected, message){
 	if (actual != expected){
