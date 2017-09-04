@@ -57,3 +57,17 @@ const dornePlan = model.planAction(moveToDorne);
 
 assert("Merge with Martell troops", dornePlan.planDescription);
 assert(20, dornePlan.days);
+
+// Test 5
+let occupyDreadfort = {
+	type: "MOVE_TROOPS",
+	from: "DRAGONSTONE",
+	to: "DREADFORT",
+	units: [
+		{type: "RAIDER", q: 100}
+	]
+};
+
+const dreadfortPlan = model.planAction(occupyDreadfort);
+
+assert("Occupy Dreadfort", dreadfortPlan.planDescription);
