@@ -2,16 +2,16 @@ import { connect } from 'react-redux';
 import { changeLocation } from '../actions';
 import Locations from './Locations/Locations.component.js';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({locations, currentLocation}) => {
     return {
-        locations: [...state.locations],
-        currentLocation: 0
+        locations: [...locations],
+        currentLocation: currentLocation
     }
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLocationChange(id, movement) {
-            dispatch(changeLocation(id, movement));
+        onLocationChange(id, movement, length) {
+            dispatch(changeLocation(id, movement, length));
         }
     };
 };

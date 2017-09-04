@@ -1,27 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { locations } from './reducers.js';
+import { currentLocation, locations } from './reducers.js';
+import { getKnownLocationInfo } from '../../model/model.js';
 
 const initialState = {
-    locations: [
-        {
-            name: "The Reach",
-            house: {
-                name: "Tyrell"
-            },
-            domain: {
-                name: "Targaryen"
-            },
-            units: [
-                {
-                    type: {
-                        type: "Infantry",
-                        name: "Unsullied"
-                    },
-                    q: 5
-                }
-            ]
-        }
-    ]
+    locations: getKnownLocationInfo(),
+    currentLocation: 0
 };
 
 const logger = (store) => (next) => (action) => {
@@ -37,7 +20,7 @@ const logger = (store) => (next) => (action) => {
 
 const storeFactory = (state = initialState) =>
     applyMiddleware(logger)(createStore)(
-        combineReducers({locations}),
+        combineReducers({locations, currentLocation}),
         initialState
     )
 

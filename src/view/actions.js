@@ -1,20 +1,16 @@
 import CONSTANTS from './constants'
 
-export const changeLocation = (id, movement) => {
+export const changeLocation = (id, movement, length) => {
     return {
         type: CONSTANTS.CHANGE_LOCATION,
         id,
-        movement
+        movement,
+        length
     };
 }
 export const viewLocation = (id) => {
     return {
         type: CONSTANTS.VIEW_LOCATION,
         id
-    };
-};
-export const getLocations = () => {
-    return {
-        type: CONSTANTS.GET_LOCATIONS
     };
 };

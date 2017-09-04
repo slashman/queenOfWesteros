@@ -1,26 +1,26 @@
 import CONSTANTS from '../constants.js';
 
-export const locations = (state = {}, action) => {
+export const currentLocation = (state = {}, action) => {
     switch (action.type) {
         case CONSTANTS.CHANGE_LOCATION:
-            // debugger;
-            // let nextLocation;
-            // if (action.movement === 'increase') {
-            //     nextLocation = state.currentLocation + 1 >= state.locations.length
-            //         ? 0
-            //         : state.currentLocation + 1;
-            // } else if (action.movement === 'decrease'){
-            //     nextLocation = state.currentLocation - 1 < state.locations.length
-            //         ? state.locations.length -1
-            //         : state.currentLocation - 1;
-            // }
-            // debugger;
-            return {
-                ...state,
-                currentLocation: 0
+            let newId = state;
+            if (action.movement === 'increase') {
+                newId = (action.id + 1) % action.length;
+            } else if (action.movement === 'decrease') {
+                newId = (action.id - 1) < 0
+                    ? action.length - 1
+                    : action.id - 1
             }
-            break;
+            return newId
         default:
             return state;
     }
 };
+
+export const locations = (state = {}, action) => {
+    switch (action.type) {
+        default:
+            return state;
+
+    }
+}
