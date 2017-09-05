@@ -6,7 +6,7 @@ const ActionsSummary = ({actions, doEnd}) => {
 
     return (
         <div>
-            <h1>4th day, 25th moon, 346 AL</h1>
+            <h1>ACTIONS SUMMARY</h1>
             <div className="actions-container">
                 {actions.map((action, index) =>
                     <div className="action" key={index}>

@@ -34,18 +34,19 @@ const Locations = ({
         let {name} = location;
         return (
             <div className="location-view">
+                <h1>LOCATION DATA</h1>
                 <div className="bar">
                     <button className="left btn"
                         onClick={prev}
-                    >LEFT</button>
+                    >←</button>
                     <h2 className="location">{ name }</h2>
                     <button className="right btn"
                         onClick={next}
-                    >RIGHT</button>
+                    >→</button>
                 </div>
                 {(location.house || location.domain)
                     ? (
-                        <div>
+                        <div className="occupants">
                             <label>Occupied by:</label>
                             <div className="owner-data">
                                 <span className="house">{ location.house.name }</span>

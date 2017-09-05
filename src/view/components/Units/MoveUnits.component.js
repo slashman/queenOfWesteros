@@ -72,6 +72,7 @@ export default class MoveUnits extends Component {
                     {actions.length > 0
                         ? (
                             <div className="actions-container">
+                                <h2>ESTIMATED OUTCOME</h2>
                                 {actions.map((action, index) =>
                                     <div className="action" key={index}>
                                         <p>{action.planDescription}</p>
