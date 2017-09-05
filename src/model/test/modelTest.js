@@ -121,7 +121,7 @@ actions = model.simulateDay();
 assert(3, actions.length);
 actions = model.simulateDay();
 // Be defeated
-assert("We have been defeated at Casterly Rock, we lost 6000 soldiers, and killed 0 defenders", actions[0]);
+assert("We have been defeated at Casterly Rock by the Lannister, we lost 6000 soldiers, and killed 0 defenders", actions[0]);
 assert("LANNISTER", knownInfo.find(l=>l.id==="CASTERLY_ROCK").house.id);
 assert("LANNISTER", knownInfo.find(l=>l.id==="CASTERLY_ROCK").domain.id);
 assert("Our 100 soldiers will reach Dreadfort in 3 days", actions[1]);
@@ -137,7 +137,7 @@ for (var i = 0; i < 2; i++){
 // Conquer territory
 assert(6, knownInfo.find(l=>l.id==="WINTERFELL").units.length);
 actions = model.simulateDay();
-assert("We have conquered Winterfell, we lost about 0 soldiers, and killed 16420 defenders", actions[0]);
+assert("We have conquered Winterfell from the Stark, we lost about 0 soldiers, and killed 16420 defenders", actions[0]);
 assert("TARGARYEN", knownInfo.find(l=>l.id==="WINTERFELL").house.id);
 assert("TARGARYEN", knownInfo.find(l=>l.id==="WINTERFELL").domain.id);
 assert(1, knownInfo.find(l=>l.id==="WINTERFELL").units.length);
@@ -148,6 +148,6 @@ model.enableEnemies = true;
 for (var i = 0; i < 13; i++){
 	actions = model.simulateDay()	
 }
-assert("The Lannister have been defeated at Sunspear", actions[0]);
+assert("The Lannister attacked our garrison at Sunspear, but were soundly defeated. We lost about 0 defenders, and killed 20 attackers.", actions[0]);
 
 console.log(successfulTests+" successful tests");

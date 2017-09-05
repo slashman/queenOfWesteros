@@ -52,21 +52,27 @@ module.exports = {
 		}
 		if (outcome === 'draw'){
 			if (a.playerDomain === this.playerHouse.id){
-				actions.push("The battle at "+destination.name+" wages on, we lost about "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+				actions.push("The battle with the "+destination.house.name +" at "+destination.name+" wages on, we lost about "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+			} else if (destination.domain.id === this.playerHouse.id){
+				actions.push("The "+HOUSES[a.playerDomain].name+" are laying siege to our garrison at "+destination.name+". We lost about "+deadDefenders+" defenders, and killed "+deadAttackers+" attackers.");
 			} else {
-				actions.push("The "+HOUSES[a.playerDomain].name+" are laying siege to "+destination.name);
+				actions.push("The "+HOUSES[a.playerDomain].name+" are laying siege to the "+destination.house.name +" at "+destination.name);
 			}
 		} else if (outcome === 'win') {
 			if (a.playerDomain === this.playerHouse.id){
-				actions.push("We have conquered "+destination.name+", we lost about "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+				actions.push("We have conquered "+destination.name+" from the "+destination.house.name+", we lost about "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+			} else if (destination.domain.id === this.playerHouse.id){
+				actions.push("The "+HOUSES[a.playerDomain].name+" defeated our garrison at "+destination.name+ " and occupied it. We lost about "+deadDefenders+" defenders, and killed "+deadAttackers+" attackers.");
 			} else {
-				actions.push("The "+HOUSES[a.playerDomain].name+" have conquered "+destination.name);
+				actions.push("The "+HOUSES[a.playerDomain].name+" have conquered "+destination.name+ " from the "+destination.house.name);
 			}
 		} else if (outcome === 'lose') {
 			if (a.playerDomain === this.playerHouse.id){
-				actions.push("We have been defeated at "+destination.name+", we lost "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+				actions.push("We have been defeated at "+destination.name+" by the "+destination.house.name+", we lost "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+			} else if (destination.domain.id === this.playerHouse.id){
+				actions.push("The "+HOUSES[a.playerDomain].name+" attacked our garrison at "+destination.name+", but were soundly defeated. We lost about "+deadDefenders+" defenders, and killed "+deadAttackers+" attackers.");
 			} else {
-				actions.push("The "+HOUSES[a.playerDomain].name+" have been defeated at "+destination.name);
+				actions.push("The "+HOUSES[a.playerDomain].name+" have been defeated by the "+destination.house.name +" at "+destination.name);
 			}
 		}
 		return outcome;
