@@ -6,7 +6,6 @@ const ActionsSummary = ({actions, doEnd}) => {
 
     return (
         <div>
-            <h1>ACTIONS SUMMARY</h1>
             <div className="actions-container">
                 {actions.map((action, index) =>
                     <div className="action" key={index}>
@@ -15,7 +14,7 @@ const ActionsSummary = ({actions, doEnd}) => {
                 )}
             </div>
             <div className="buttons">
-                <button onClick={ok}>OK</button>
+                <button onClick={ok}>Ok</button>
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 .location-view {
-    width: 600px;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 20px;
@@ -29,9 +29,8 @@
     }
 
     .location {
-        width: 200px;
+        width: 180px;
         height: 30px;
-        border: 1px solid black;
         text-align: center;
     }
 

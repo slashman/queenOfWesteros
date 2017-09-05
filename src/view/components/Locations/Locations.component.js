@@ -34,7 +34,6 @@ const Locations = ({
         let {name} = location;
         return (
             <div className="location-view">
-                <h1>LOCATION DATA</h1>
                 <div className="bar">
                     <button className="left btn"
                         onClick={prev}
@@ -64,14 +63,14 @@ const Locations = ({
                     ? (
                         <button className="action btn"
                             onClick={move}>
-                            MOVE UNITS
+                            Move Troops
                         </button>
                     )
                     : null
                 }
                 <button className="action btn"
                     onClick={nextDay}>
-                        NEXT DAY
+                        Next Day
                 </button>
             </div>
         );

@@ -1,5 +1,7 @@
 import {Component} from 'react';
 
+import './MoveUnits.scss';
+
 export default class MoveUnits extends Component {
     constructor(props) {
         super(props);
@@ -57,10 +59,9 @@ export default class MoveUnits extends Component {
         if (location) {
             renderTarget = (
                 <div>
-                    <h1>MOVE UNITS</h1>
                     {units.map((unit, index) =>
                         <div className="unit" key={unit.type.id}>
-                            <span className="unit">{unit.type.name}</span>
+                            <div className="unitName">{unit.type.name}</div>
                             <input type="text" defaultValue={unit.aq} ref={`ref-${unit.type.id}`}/>
                         </div>
                     )}
@@ -72,7 +73,6 @@ export default class MoveUnits extends Component {
                     {actions.length > 0
                         ? (
                             <div className="actions-container">
-                                <h2>ESTIMATED OUTCOME</h2>
                                 {actions.map((action, index) =>
                                     <div className="action" key={index}>
                                         <p>{action.planDescription}</p>
@@ -84,8 +84,8 @@ export default class MoveUnits extends Component {
                         : null
                     }
                     <div>
-                        <button onClick={this.moveUnits.bind(this)}>OK</button>
-                        <button onClick={this.cancel.bind(this)}>CANCEL</button>
+                        <button onClick={this.moveUnits.bind(this)}>Ok</button>
+                        <button onClick={this.cancel.bind(this)}>Cancel</button>
                     </div>
                 </div>
             );
