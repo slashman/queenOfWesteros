@@ -21,7 +21,6 @@ export const currentLocation = (state = {}, action) => {
 export const locations = (state = {}, action) => {
     switch (action.type) {
         case CONSTANTS.MOVE_UNITS_CONFIRM:
-            console.log('Reducing locations');
             return model.getKnownLocationInfo();
         default:
             return state;
@@ -38,6 +37,8 @@ export const view = (state = {}, action) => {
             return CONSTANTS.VIEWS.LOCATIONS;
         case CONSTANTS.NEXT_DAY:
             return CONSTANTS.VIEWS.SUMMARY;
+        case CONSTANTS.SIMULATE_ATTACK:
+            return CONSTANTS.VIEWS.UNITS;
         case CONSTANTS.END_TICK:
         default:
             return CONSTANTS.VIEWS.LOCATIONS;
@@ -46,6 +47,9 @@ export const view = (state = {}, action) => {
 
 export const actionResults = (state = [], action) => {
     switch (action.type) {
+        case CONSTANTS.SIMULATE_ATTACK:
+            console.log("Action:", action);
+            return [ action.results];
         case CONSTANTS.NEXT_DAY:
             return [...action.results];
         default:

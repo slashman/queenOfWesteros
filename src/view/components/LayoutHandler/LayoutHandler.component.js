@@ -13,7 +13,8 @@ const LayoutHandler = ({
     onCancel,
     doNextDay,
     actionResults,
-    doEnd
+    doEnd,
+    simulateAttack
 }) => {
     let targetComponent = null;
     switch (view) {
@@ -21,7 +22,7 @@ const LayoutHandler = ({
             targetComponent = <ActionsSummary actions={actionResults} doEnd={doEnd} />
             break;
         case CONSTANTS.VIEWS.UNITS:
-            targetComponent = <MoveUnits locations={locations} currentLocation={currentLocation} onCancel={onCancel} onUnitsMoved={onMoveUnitsConfirm} />
+            targetComponent = <MoveUnits locations={locations} currentLocation={currentLocation} onCancel={onCancel} onUnitsMoved={onMoveUnitsConfirm} simulateAttack={simulateAttack} actions={actionResults}/>
             break;
         case CONSTANTS.VIEWS.LOCATIONS:
         default:

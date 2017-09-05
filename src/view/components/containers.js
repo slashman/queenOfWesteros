@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeLocation, moveUnitsStart, cancelUnitMovements, moveUnitsConfirm, nextDay, endTick } from '../actions';
+import { changeLocation, moveUnitsStart, cancelUnitMovements, moveUnitsConfirm, nextDay, endTick, simulateAttack } from '../actions';
 import LayoutHandler from './LayoutHandler/LayoutHandler.component.js';
 
 
@@ -32,6 +32,10 @@ export const ViewHandlerComponent = connect(
             },
             doEnd() {
                 dispatch(endTick())
+            },
+            simulateAttack(data) {
+                console.log("attacl");
+                dispatch(simulateAttack(data));
             }
         };
     }

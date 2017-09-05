@@ -6,13 +6,12 @@ export default class MoveUnits extends Component {
         this.props = props;
     }
 
-    moveUnits(event) {
-        let {onUnitsMoved, locations, currentLocation} = this.props,
+    getBattleData() {
+        let { locations, currentLocation} = this.props,
             location = locations[currentLocation],
             {units} = location,
             data = {};
 
-        event.preventDefault();
         data.units = units.map((unit, index) => {
             let ref = `ref-${unit.type.id}`;
             return {
@@ -22,7 +21,15 @@ export default class MoveUnits extends Component {
         }).filter((item) => item.q > 0);
         data.from = location.id,
         data.to = this.refs.select.value;
-        console.log(data);
+
+        return data;
+    }
+
+    moveUnits(event) {
+        let {onUnitsMoved} = this.props,
+            data = this.getBattleData();
+
+        event.preventDefault();
         onUnitsMoved(data);
     }
 
@@ -32,8 +39,16 @@ export default class MoveUnits extends Component {
         onCancel(currentLocation);
     }
 
+    targetChanged(event) {
+        let {simulateAttack} = this.props,
+            data = this.getBattleData();
+        event.preventDefault();
+        simulateAttack(data)
+        // console.log('data', data);
+    }
+
     render() {
-        let {locations, currentLocation} = this.props,
+        let {locations, currentLocation, actions} = this.props,
             location = locations[currentLocation],
             availableLocations = locations.filter((location, index) => index !== currentLocation),
             {units} = location,
@@ -49,11 +64,24 @@ export default class MoveUnits extends Component {
                             <input type="text" defaultValue={unit.aq} ref={`ref-${unit.type.id}`}/>
                         </div>
                     )}
-                    <select className="select" ref='select'>
+                    <select className="select" ref='select' onChange={this.targetChanged.bind(this)}>
                         { availableLocations.map((location, index) =>
                             <option key={index} value={location.id}>{location.name}</option>
                         )}
                     </select>
+                    {actions.length > 0
+                        ? (
+                            <div className="actions-container">
+                                {actions.map((action, index) =>
+                                    <div className="action" key={index}>
+                                        <p>{action.planDescription}</p>
+                                        <p>Estimated days: {action.days}</p>
+                                    </div>
+                                )}
+                            </div>
+                        )
+                        : null
+                    }
                     <div>
                         <button onClick={this.moveUnits.bind(this)}>OK</button>
                         <button onClick={this.cancel.bind(this)}>CANCEL</button>

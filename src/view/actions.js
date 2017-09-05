@@ -49,3 +49,15 @@ export const endTick = () => {
         type: CONSTANTS.END_TICK
     }
 }
+
+export const simulateAttack = (data) => {
+    let actionData = {
+        type: "MOVE_TROOPS",
+        ...data
+    },
+    results = model.planAction(actionData);
+    return {
+        type: CONSTANTS.SIMULATE_ATTACK,
+        results
+    };
+}
