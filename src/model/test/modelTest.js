@@ -43,7 +43,7 @@ let attackCasterlyRock = {
 const result = model.planAction(attackCasterlyRock);
 
 assert("Attack Lannister troops", result.planDescription);
-assert(24, result.days);
+assert(12, result.days);
 
 // Test 3
 
@@ -69,7 +69,7 @@ let moveToDorne = {
 const dornePlan = model.planAction(moveToDorne);
 
 assert("Merge with Martell troops", dornePlan.planDescription);
-assert(20, dornePlan.days);
+assert(10, dornePlan.days);
 
 // Test 5
 let occupyDreadfort = {
@@ -105,10 +105,10 @@ model.scheduleAction(attackWinterfell);
 //console.log(model.getScheduledActions());
 let actions = model.simulateDay();
 //console.log(actions);
-assert("Our 6000 soldiers will reach Casterly Rock in 23 days", actions[0]);
-assert("Our 100 soldiers will reach Dreadfort in 31 days", actions[1]);
-assert("Our 100 soldiers will reach Sunspear in 19 days", actions[2]);
-for (var i = 0; i < 19; i++){
+assert("Our 6000 soldiers will reach Casterly Rock in 11 days", actions[0]);
+assert("Our 100 soldiers will reach Dreadfort in 15 days", actions[1]);
+assert("Our 100 soldiers will reach Sunspear in 9 days", actions[2]);
+for (var i = 0; i < 9; i++){
 	model.simulateDay()	
 }
 knownInfo = model.getKnownLocationInfo();
@@ -119,21 +119,19 @@ assert("Our 100 soldiers reached Sunspear and merged with Martell troops", actio
 assert(6, knownInfo.find(l=>l.id==="SUNSPEAR").units.length);
 actions = model.simulateDay();
 assert(3, actions.length);
-model.simulateDay()	
-model.simulateDay();
 actions = model.simulateDay();
 // Be defeated
 assert("We have been defeated at Casterly Rock, we lost 6000 soldiers, and killed 0 defenders", actions[0]);
 assert("LANNISTER", knownInfo.find(l=>l.id==="CASTERLY_ROCK").house.id);
 assert("LANNISTER", knownInfo.find(l=>l.id==="CASTERLY_ROCK").domain.id);
-assert("Our 100 soldiers will reach Dreadfort in 7 days", actions[1]);
-for (var i = 0; i < 7; i++){
+assert("Our 100 soldiers will reach Dreadfort in 3 days", actions[1]);
+for (var i = 0; i < 3; i++){
 	model.simulateDay()	
 }
 // Occupy territory
 actions = model.simulateDay();
 assert("Our 100 soldiers reached and occupied Dreadfort", actions[0]);
-for (var i = 0; i < 5; i++){
+for (var i = 0; i < 2; i++){
 	model.simulateDay()	
 }
 // Conquer territory
@@ -147,7 +145,7 @@ actions = model.simulateDay();
 assert(0, actions.length);
 
 model.enableEnemies = true;
-for (var i = 0; i < 24; i++){
+for (var i = 0; i < 13; i++){
 	actions = model.simulateDay()	
 }
 assert("The LANNISTER have been defeated at Sunspear", actions[0]);

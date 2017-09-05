@@ -40,7 +40,7 @@ const model = {
 		} else {
 			planDescription = "Occupy "+destination.name;
 		}
-		const days = Math.ceil((Math.abs(destination.x-origin.x)+Math.abs(destination.y-origin.y))/25);
+		const days = Math.ceil((Math.abs(destination.x-origin.x)+Math.abs(destination.y-origin.y))/50);
 		return {
 			planDescription: planDescription,
 			days: days
