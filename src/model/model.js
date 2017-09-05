@@ -57,6 +57,11 @@ const model = {
 		const location = knownInfo.find((l)=>l.id===a.from);
 		a.units.forEach(au=>location.units.forEach(lu => lu.type.id == au.type ? lu.aq -= au.q : false));
 		location.units = location.units.filter((u)=>u.aq > 0);
+		const remainingGarrison = location.units.reduce((s,u)=>s+u.aq, 0);
+		if (remainingGarrison === 0){
+			location.house = false;
+			location.domain = false;
+		}
 		a.totalUnits = a.units.reduce((s,u)=>s+u.q, 0);
 		a.playerDomain = house.id;
 	},
