@@ -187,7 +187,7 @@ const model = {
 	},
 	occupy: function(a){
 		const destination = knownInfo.find((l)=>l.id === a.to);
-		destination.units = a.units.map(u => ({q: u.q, type: UNIT_TYPES[u.type]}));
+		destination.units = a.units.map(u => ({q: u.q, aq: u.q, type: UNIT_TYPES[u.type]}));
 		destination.domain = playerHouse;
 		destination.house = playerHouse;
 	},
