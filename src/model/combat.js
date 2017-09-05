@@ -4,9 +4,10 @@
 const UNIT_TYPES = require('./unitTypes');
 
 module.exports = {
-	inject: function(model, rand){
+	inject: function(model, rand, playerHouse){
 		this.model = model;
 		this.rand = rand;
+		this.playerHouse = playerHouse;
 	},
 	attack: function(a, actions){
 		const destination = this.model.getKnownLocationInfo().find((l)=>l.id === a.to);
@@ -48,11 +49,23 @@ module.exports = {
 			}
 		}
 		if (outcome === 'draw'){
-			actions.push("The battle at "+destination.name+" wages on, we lost about "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+			if (a.playerDomain === this.playerHouse.id){
+				actions.push("The battle at "+destination.name+" wages on, we lost about "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+			} else {
+				actions.push("The "+a.playerDomain+" are laying siege to "+destination.name);
+			}
 		} else if (outcome === 'win') {
-			actions.push("We have conquered "+destination.name+", we lost about "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+			if (a.playerDomain === this.playerHouse.id){
+				actions.push("We have conquered "+destination.name+", we lost about "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+			} else {
+				actions.push("The "+a.playerDomain+" have conquered "+destination.name);
+			}
 		} else if (outcome === 'lose') {
-			actions.push("We have been defeated at "+destination.name+", we lost "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+			if (a.playerDomain === this.playerHouse.id){
+				actions.push("We have been defeated at "+destination.name+", we lost "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
+			} else {
+				actions.push("The "+a.playerDomain+" have been defeated at "+destination.name);
+			}
 		}
 		return outcome;
 

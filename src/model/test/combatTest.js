@@ -4,10 +4,14 @@
 const combat = require('../combat');
 const UNIT_TYPES = require('../unitTypes');
 
+let successfulTests = 0;
+
 function assert(expected, actual){
 	if (expected != actual){
 		throw new Error("Expected: ["+expected+"] but got ["+actual+"]");
-	}	
+	} else {
+		successfulTests++;
+	}
 }
 
 let MOCK_LOCATIONS = [
@@ -33,7 +37,7 @@ const mockModel = {
 	getKnownLocationInfo: () => Object.assign([], MOCK_LOCATIONS)
 };
 
-combat.inject(mockModel, mockRand);
+combat.inject(mockModel, mockRand, {id: "TARGARYEN"});
 
 // Test 1
 let actions = [];
@@ -42,7 +46,8 @@ let attackAction = {
 	units: [
 		{type: "BARBARIAN", q: 3000 },
 		{type: "HEAVY_CAVALRY", q: 1000 }
-	]
+	],
+	playerDomain: "TARGARYEN"
 };
 
 combat.attack(attackAction, actions);
@@ -68,7 +73,8 @@ attackAction = {
 	units: [
 		{type: "BARBARIAN", q: 3000 },
 		{type: "HEAVY_CAVALRY", q: 10000 }
-	]
+	],
+	playerDomain: "TARGARYEN"
 };
 
 combat.attack(attackAction, actions);
@@ -92,7 +98,10 @@ attackAction = {
 	to: "WINTERFELL",
 	units: [
 		{type: "INFANTRY", q: 7000 }
-	]
+	],
+	playerDomain: "TARGARYEN"
 };
 combat.attack(attackAction, actions);
 assert("The battle at Winterfell wages on, we lost about 3500 soldiers, and killed 0 defenders", actions[0]);
+
+console.log(successfulTests+" successful tests");

@@ -2,20 +2,23 @@
 "use strict";
 
 const model = require('../model');
-// TODO: Inject mock RNG
 const mockRand = {
 	range: function(a, b){
 		return b;
+	},
+	of: function(array){
+		return array[this.range(0, array.length-1)];
 	}
 };
 
-model.inject(mockRand);
+model.inject(mockRand, {id: "TARGARYEN"});
 
+let successfulTests = 0;
 function assert(expected, actual){
 	if (expected != actual){
 		throw new Error("Expected: ["+expected+"] but got ["+actual+"]");
 	} else {
-		console.log("+ Got ["+actual+"]");
+		successfulTests++;
 	}
 }
 
@@ -87,6 +90,7 @@ model.scheduleAction(occupyDreadfort);
 assert(2, model.getScheduledActions().length);
 
 // Test 7
+model.enableEnemies = false;
 model.scheduleAction(moveToDorne);
 let attackWinterfell = {
 	type: "MOVE_TROOPS",
@@ -141,3 +145,13 @@ assert("TARGARYEN", knownInfo.find(l=>l.id==="WINTERFELL").domain.id);
 assert(1, knownInfo.find(l=>l.id==="WINTERFELL").units.length);
 actions = model.simulateDay();
 assert(0, actions.length);
+
+model.enableEnemies = true;
+for (var i = 0; i < 24; i++){
+	actions = model.simulateDay()	
+}
+assert("The LANNISTER have been defeated at Sunspear", actions[0]);
+
+
+
+console.log(successfulTests+" successful tests");

@@ -46,7 +46,10 @@ const model = {
 			days: days
 		};
 	},
-	scheduleAction: function(a){
+	scheduleAction: function(a, house){
+		if (!house){
+			house = playerHouse;
+		}
 		a = Object.assign({}, a, this.planAction(a));
 		a.pendingDays = a.days;
 		scheduledActions.push(a);
@@ -54,6 +57,7 @@ const model = {
 		const location = knownInfo.find((l)=>l.id===a.from);
 		a.units.forEach(au=>location.units.forEach(lu => lu.type.id == au.type ? lu.aq -= au.q : false));
 		a.totalUnits = a.units.reduce((s,u)=>s+u.q, 0);
+		a.playerDomain = house.id;
 	},
 	validateAction: function(a){
 		/*
@@ -84,16 +88,73 @@ const model = {
 	getScheduledActions: function(){
 		return scheduledActions;
 	},
+	getAction: function(house){
+		// Pick a random domain
+		// Pick one of the units therein
+		// Move it to a random place
+		let from = this.getRandomDomain(house);
+		if (!from){
+			// Defeated!
+			return false;
+		}
+		let to = this.getRandomDestination(house);
+		if (!to){
+			//Won!
+			return false;
+		}
+		const unit = this.rand.of(from.units);
+
+		return {
+			type: "MOVE_TROOPS",
+			to: to.id,
+			from: from.id,
+			units: [
+				{
+					type: unit.type.id,
+					q: unit.q
+				}
+			]
+		};
+	},
+	getRandomDomain: function(house){
+		const domains = this.getKnownLocationInfo().filter(l=>l.domain === house && l.units.length > 0);
+		if (domains === undefined){
+			return false;
+		}
+		return this.rand.of(domains);
+	},
+	getRandomDestination: function(house){
+		const domains = this.getKnownLocationInfo().filter(l=>l.domain != house);
+		return this.rand.of(domains);
+	},
+	enableEnemies: true,
 	simulateDay: function(){
 		const actions = [];
-		// Execute all scheduled actions
+		if (this.enableEnemies){
+			// Make the enemies schedule actions
+			for (var i = 0; i < 3; i++){
+				let action = this.getAction(HOUSES.LANNISTER);
+				if (action){
+					this.scheduleAction(action, HOUSES.LANNISTER);
+				}
+				action = this.getAction(HOUSES.STARK);
+				if (action){
+					this.scheduleAction(action, HOUSES.STARK);
+				}
+			}
+		}
+		// Execute all scheduled player actions
 		scheduledActions.forEach(a=>{
 			const destination = knownInfo.find((l)=>l.id === a.to);
 			if (a.pendingDays === 0){
 				// Let's try to land here!
-				if (destination.domain && destination.domain.id === playerHouse.id){
+				if (destination.domain && destination.domain.id === a.playerDomain){
 					destination.units = destination.units.concat(a.units.map(u => ({q: u.q, type: UNIT_TYPES[u.type]})));
-					actions.push("Our "+a.totalUnits+" soldiers reached "+destination.name+" and merged with "+destination.house.name+" troops");
+					if (a.playerDomain === playerHouse.id){
+						actions.push("Our "+a.totalUnits+" soldiers reached "+destination.name+" and merged with "+destination.house.name+" troops");
+					} else {
+						actions.push(a.totalUnits+" "+a.playerDomain+" soldiers reached "+destination.name+" and merged with "+destination.house.name+" troops");
+					}
 					a.toRemove = true;
 				} else if (destination.house){
 					let outcome = combat.attack(a, actions);
@@ -104,13 +165,21 @@ const model = {
 						a.toRemove = true;
 					}
 				} else {
-					actions.push("Our "+a.totalUnits+" soldiers reached and occupied "+destination.name);
+					if (a.playerDomain === playerHouse.id){
+						actions.push("Our "+a.totalUnits+" soldiers reached and occupied "+destination.name);
+					} else {
+						actions.push(a.totalUnits+" "+a.playerDomain+" soldiers reached and occupied "+destination.name);
+					}
 					this.occupy(a);
 					a.toRemove = true;
 				}
 			} else {
 				a.pendingDays --;
-				actions.push("Our "+a.totalUnits+" soldiers will reach "+destination.name+" in "+a.pendingDays+" days");
+				if (a.playerDomain === playerHouse.id){
+					actions.push("Our "+a.totalUnits+" soldiers will reach "+destination.name+" in "+a.pendingDays+" days");
+				} else {
+					// This is not shown, intentionally, to make it cooler
+				}
 			}
 		});
 		scheduledActions = scheduledActions.filter(a=>!a.toRemove);
@@ -122,12 +191,13 @@ const model = {
 		destination.domain = playerHouse;
 		destination.house = playerHouse;
 	},
-	inject: function(rand){
-		combat.inject(this, rand);
+	inject: function(rand, playerHouse){
+		this.rand = rand;
+		combat.inject(this, rand, playerHouse);
 	}
 };
 
-combat.inject(model, rand);
+combat.inject(model, rand, playerHouse);
 
 module.exports = model;
 
