@@ -56,6 +56,7 @@ const model = {
 		// Reduce amount of available troops
 		const location = knownInfo.find((l)=>l.id===a.from);
 		a.units.forEach(au=>location.units.forEach(lu => lu.type.id == au.type ? lu.aq -= au.q : false));
+		location.units = location.units.filter((u)=>u.aq > 0);
 		a.totalUnits = a.units.reduce((s,u)=>s+u.q, 0);
 		a.playerDomain = house.id;
 	},
@@ -149,7 +150,7 @@ const model = {
 			if (a.pendingDays === 0){
 				// Let's try to land here!
 				if (destination.domain && destination.domain.id === a.playerDomain){
-					destination.units = destination.units.concat(a.units.map(u => ({q: u.q, type: UNIT_TYPES[u.type]})));
+					destination.units = destination.units.concat(a.units.map(u => ({q: u.q, aq: u.q, type: UNIT_TYPES[u.type]})));
 					if (a.playerDomain === playerHouse.id){
 						actions.push("Our "+a.totalUnits+" soldiers reached "+destination.name+" and merged with "+destination.house.name+" troops");
 					} else {
