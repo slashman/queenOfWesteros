@@ -197,7 +197,9 @@ const model = {
 	}
 };
 
-combat.inject(model, rand, playerHouse);
+//combat.inject(model, rand, playerHouse);
+
+model.inject(rand, playerHouse);
 
 module.exports = model;
 
