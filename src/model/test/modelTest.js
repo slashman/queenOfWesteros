@@ -148,8 +148,6 @@ model.enableEnemies = true;
 for (var i = 0; i < 13; i++){
 	actions = model.simulateDay()	
 }
-assert("The LANNISTER have been defeated at Sunspear", actions[0]);
-
-
+assert("The Lannister have been defeated at Sunspear", actions[0]);
 
 console.log(successfulTests+" successful tests");

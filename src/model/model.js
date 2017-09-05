@@ -153,7 +153,7 @@ const model = {
 					if (a.playerDomain === playerHouse.id){
 						actions.push("Our "+a.totalUnits+" soldiers reached "+destination.name+" and merged with "+destination.house.name+" troops");
 					} else {
-						actions.push(a.totalUnits+" "+a.playerDomain+" soldiers reached "+destination.name+" and merged with "+destination.house.name+" troops");
+						actions.push(a.totalUnits+" "+HOUSES[a.playerDomain].name+" soldiers reached "+destination.name+" and merged with "+destination.house.name+" troops");
 					}
 					a.toRemove = true;
 				} else if (destination.house){
@@ -168,7 +168,7 @@ const model = {
 					if (a.playerDomain === playerHouse.id){
 						actions.push("Our "+a.totalUnits+" soldiers reached and occupied "+destination.name);
 					} else {
-						actions.push(a.totalUnits+" "+a.playerDomain+" soldiers reached and occupied "+destination.name);
+						actions.push(a.totalUnits+" "+HOUSES[a.playerDomain].name+" soldiers reached and occupied "+destination.name);
 					}
 					this.occupy(a);
 					a.toRemove = true;

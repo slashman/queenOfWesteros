@@ -1,6 +1,8 @@
 /* jshint node: true */
 "use strict";
 
+const HOUSES = require('./houses');
+
 const UNIT_TYPES = require('./unitTypes');
 
 module.exports = {
@@ -52,19 +54,19 @@ module.exports = {
 			if (a.playerDomain === this.playerHouse.id){
 				actions.push("The battle at "+destination.name+" wages on, we lost about "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
 			} else {
-				actions.push("The "+a.playerDomain+" are laying siege to "+destination.name);
+				actions.push("The "+HOUSES[a.playerDomain].name+" are laying siege to "+destination.name);
 			}
 		} else if (outcome === 'win') {
 			if (a.playerDomain === this.playerHouse.id){
 				actions.push("We have conquered "+destination.name+", we lost about "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
 			} else {
-				actions.push("The "+a.playerDomain+" have conquered "+destination.name);
+				actions.push("The "+HOUSES[a.playerDomain].name+" have conquered "+destination.name);
 			}
 		} else if (outcome === 'lose') {
 			if (a.playerDomain === this.playerHouse.id){
 				actions.push("We have been defeated at "+destination.name+", we lost "+deadAttackers+" soldiers, and killed "+deadDefenders+" defenders");
 			} else {
-				actions.push("The "+a.playerDomain+" have been defeated at "+destination.name);
+				actions.push("The "+HOUSES[a.playerDomain].name+" have been defeated at "+destination.name);
 			}
 		}
 		return outcome;
