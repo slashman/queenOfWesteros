@@ -117,7 +117,7 @@ const model = {
 			units: [
 				{
 					type: unit.type.id,
-					q: unit.q
+					q: unit.aq
 				}
 			]
 		};
