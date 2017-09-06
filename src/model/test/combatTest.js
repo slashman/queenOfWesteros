@@ -55,7 +55,7 @@ let attackAction = {
 
 combat.attack(attackAction, actions);
 
-assert("We have been defeated at Winterfell by the Stark, we lost 4000 soldiers, and killed 0 defenders", actions[0]);
+assert("We have been defeated at Winterfell by the Stark, we lost 4000 soldiers, and killed 100 defenders", actions[0]);
 
 // Test 2
 MOCK_LOCATIONS = [
@@ -84,7 +84,7 @@ attackAction = {
 };
 
 combat.attack(attackAction, actions);
-assert("We have conquered Winterfell from the Stark, we lost about 0 soldiers, and killed 5000 defenders", actions[0]);
+assert("We have conquered Winterfell from the Stark, we lost about 100 soldiers, and killed 5000 defenders", actions[0]);
 
 // Test 3
 MOCK_LOCATIONS = [
@@ -111,6 +111,6 @@ attackAction = {
 	playerDomain: "TARGARYEN"
 };
 combat.attack(attackAction, actions);
-assert("The battle with the Stark at Winterfell wages on, we lost about 3500 soldiers, and killed 0 defenders", actions[0]);
+assert("The battle with the Stark at Winterfell wages on, we lost about 3500 soldiers, and killed 100 defenders", actions[0]);
 
 console.log(successfulTests+" successful tests");

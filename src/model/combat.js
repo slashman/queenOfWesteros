@@ -33,7 +33,7 @@ module.exports = {
 					outcome = 'win';
 					break;
 				}
-			}
+			} 
 			//TODO: Residual damage to attackers
 			//Defense
 			combinedAttack = destination.units.reduce((s,u)=>s+(u.q*u.type.attack), 0);
@@ -49,6 +49,13 @@ module.exports = {
 					break;
 				}
 			}
+		}
+		// This is a temporary hack to avoid bad messages with 0 dead people. People always dies at war.
+		if (deadDefenders === 0){
+			deadDefenders = this.rand.range(5, 100);
+		}
+		if (deadAttackers === 0){
+			deadAttackers = this.rand.range(5, 100);
 		}
 		if (outcome === 'draw'){
 			if (a.playerDomain === this.playerHouse.id){
