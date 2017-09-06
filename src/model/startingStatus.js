@@ -84,10 +84,6 @@ module.exports = {
 			{
 				type: UNIT_TYPES.HEAVY_CAVALRY,
 				q: 1000
-			},
-			{
-				type: UNIT_TYPES.SHIP,
-				q: 0
 			}
 		]
 	},
@@ -100,20 +96,8 @@ module.exports = {
 				q: 120
 			},
 			{
-				type: UNIT_TYPES.HEAVY_INFANTRY,
-				q: 0
-			},
-			{
 				type: UNIT_TYPES.CAVALRY,
 				q: 30
-			},
-			{
-				type: UNIT_TYPES.HEAVY_CAVALRY,
-				q: 0
-			},
-			{
-				type: UNIT_TYPES.SHIP,
-				q: 0
 			}
 		]
 	},
@@ -126,20 +110,12 @@ module.exports = {
 				q: 4000
 			},
 			{
-				type: UNIT_TYPES.HEAVY_INFANTRY,
-				q: 0
-			},
-			{
 				type: UNIT_TYPES.CAVALRY,
 				q: 300
 			},
 			{
 				type: UNIT_TYPES.HEAVY_CAVALRY,
 				q: 10
-			},
-			{
-				type: UNIT_TYPES.SHIP,
-				q: 0
 			}
 		]
 	},
@@ -150,10 +126,6 @@ module.exports = {
 			{
 				type: UNIT_TYPES.INFANTRY,
 				q: 2000
-			},
-			{
-				type: UNIT_TYPES.HEAVY_INFANTRY,
-				q: 0
 			},
 			{
 				type: UNIT_TYPES.CAVALRY,
@@ -230,14 +202,6 @@ module.exports = {
 				q: 1500
 			},
 			{
-				type: UNIT_TYPES.CAVALRY,
-				q: 0
-			},
-			{
-				type: UNIT_TYPES.HEAVY_CAVALRY,
-				q: 0
-			},
-			{
 				type: UNIT_TYPES.WAR_LONGSHIP,
 				q: 100
 			}
@@ -254,10 +218,6 @@ module.exports = {
 			{
 				type: UNIT_TYPES.HEAVY_INFANTRY,
 				q: 2000
-			},
-			{
-				type: UNIT_TYPES.CAVALRY,
-				q: 0
 			},
 			{
 				type: UNIT_TYPES.HEAVY_CAVALRY,
