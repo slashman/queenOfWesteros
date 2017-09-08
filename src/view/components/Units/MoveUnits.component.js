@@ -22,31 +22,27 @@ export default class MoveUnits extends Component {
             };
         }).filter((item) => item.q > 0);
         data.from = location.id,
-        data.to = this.refs.select.value;
+        data.to = this.refs.target.value;
 
         return data;
     }
 
-    moveUnits(event) {
+    moveUnits() {
         let {onUnitsMoved} = this.props,
             data = this.getBattleData();
 
-        event.preventDefault();
         onUnitsMoved(data);
     }
 
-    cancel(event) {
+    cancel() {
         let {onCancel, currentLocation} = this.props;
-        event.preventDefault();
         onCancel(currentLocation);
     }
 
-    targetChanged(event) {
+    targetChanged() {
         let {simulateAttack} = this.props,
             data = this.getBattleData();
-        event.preventDefault();
         simulateAttack(data)
-        // console.log('data', data);
     }
 
     render() {
@@ -58,34 +54,58 @@ export default class MoveUnits extends Component {
 
         if (location) {
             renderTarget = (
-                <div>
-                    {units.map((unit, index) =>
-                        <div className="unit" key={unit.type.id}>
-                            <div className="unitName">{unit.type.name}</div>
-                            <input type="text" defaultValue={unit.aq} ref={`ref-${unit.type.id}`}/>
-                        </div>
-                    )}
-                    <select className="select" ref='select' onChange={this.targetChanged.bind(this)}>
-                        { availableLocations.map((location, index) =>
-                            <option key={index} value={location.id}>{location.name}</option>
-                        )}
-                    </select>
-                    {actions.length > 0
-                        ? (
-                            <div className="actions-container">
-                                {actions.map((action, index) =>
-                                    <div className="action" key={index}>
-                                        <p>{action.planDescription}</p>
-                                        <p>Estimated days: {action.days}</p>
+                <div className="move-units container">
+                    <div className="row">
+                        <div className="col-12">
+                            <form noValidate>
+                                {units.map((unit, index) =>
+                                    <div className="form-group" key={unit.type.id}>
+                                        <label htmlFor={unit.type.id}>
+                                            <strong>{unit.type.name}</strong> ({unit.type.type})
+                                        </label>
+                                        <input type="text" className="form-control" defaultValue={unit.aq} ref={`ref-${unit.type.id}`} id={unit.type.id} />
                                     </div>
                                 )}
-                            </div>
-                        )
-                        : null
-                    }
-                    <div>
-                        <button onClick={this.moveUnits.bind(this)}>Ok</button>
-                        <button onClick={this.cancel.bind(this)}>Cancel</button>
+                                <div className="form-group">
+                                    <label htmlFor="target">Target</label>
+                                    <select className="form-control" ref='target' id="target" onChange={this.targetChanged.bind(this)}>
+                                        { availableLocations.map((location, index) =>
+                                            <option key={index} value={location.id}>{location.name}</option>
+                                        )}
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <ul className="list-unstyled">
+                                { (actions && actions.length > 0)
+                                    ? actions.map((action, index) =>
+                                        <li className="action" key={index}>
+                                            <blockquote className="blockquote">
+                                                <p>{action.planDescription}</p>
+                                                <footer>Estimated days: {action.days}</footer>
+                                            </blockquote>
+                                        </li>)
+                                    : null
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="row actions">
+                        <div className="col">
+                            <button className="btn btn-block btn-action btn-danger"
+                                    onClick={this.moveUnits.bind(this)}>
+                                Ok
+                            </button>
+                        </div>
+                        <div className="col">
+                            <button className="btn btn-block btn-action btn-danger"
+                                    onClick={this.cancel.bind(this)}>
+                                cancel
+                            </button>
+                        </div>
                     </div>
                 </div>
             );
@@ -93,54 +113,3 @@ export default class MoveUnits extends Component {
         return renderTarget;
     }
 }
-//
-// const MoveUnits = ({
-//     locations,
-//     currentLocation,
-//     onUnitsMoved = (f) => f,
-//     onCancel = (f) => f
-// }) => {
-//
-//     let location = locations[currentLocation],
-//         renderTarget = null;
-//
-//     const moveUnits = (event) => {
-//         event.preventDefault();
-//         let data = {
-//             from: location.id,
-//             to:
-//         }
-//         // let actionData = {
-//         //     type: "MOVE_TROOPS",
-//         //     from: data.from || "DRAGONSTONE",
-//         //     to: data.to || "CASTERLY_ROCK",
-//         //     units: data.units
-//         // };
-//         // onUnitsMoved(data);
-//     };
-//
-//     const cancel = (event) => {
-//         event.preventDefault();
-//         onCancel(currentLocation);
-//     };
-//
-//     if (location) {
-//         let {units} = location,
-//             availableLocations = locations.filter((location, index) => index !== currentLocation);
-        // renderTarget = (
-        //     <div>
-        //         <UnitsSelector units={units} />
-        //         <select className="select"
-        //             onChange={}>
-        //             { availableLocations.map((location, index) =>
-        //                 <option key={index} value={location.id}>{location.name}</option>
-        //             )}
-        //         </select>
-        //         <button onClick={moveUnits}>OK</button>
-        //         <button onClick={cancel}>CANCEL</button>
-        //     </div>
-        // );
-//     }
-//     return renderTarget;
-// };
-// export default MoveUnits;

@@ -21,7 +21,7 @@ const LayoutHandler = ({
         title;
     switch (view) {
         case CONSTANTS.VIEWS.SUMMARY:
-            title = "Day Summary";
+            title = "Raven Scrolls";
             targetComponent = <ActionsSummary actions={actionResults} doEnd={doEnd} />
             break;
         case CONSTANTS.VIEWS.UNITS:

@@ -1,20 +1,26 @@
-const ActionsSummary = ({actions, doEnd}) => {
-    const ok = (event) => {
-        event.preventDefault();
-        doEnd()
-    };
-
+const ActionsSummary = ({
+    doEnd = () => {},
+    actions = ["No scrolls arrived today"]
+}) => {
     return (
-        <div>
-            <div className="actions-container">
-                {actions.map((action, index) =>
-                    <div className="action" key={index}>
-                        <p>{action}</p>
-                    </div>
-                )}
+        <div className="actions-summary container">
+            <div className="row">
+                <div className="col-12">
+                    <ul className="list-unstyled">
+                        {actions.map((action, index) =>
+                            <li className="action" key={index}>
+                                <blockquote className="blockquote">
+                                    <p>{action}</p>
+                                </blockquote>
+                            </li>
+                        )}
+                    </ul>
+                </div>
             </div>
-            <div className="buttons">
-                <button onClick={ok}>Ok</button>
+            <div className="row actions">
+                <button className="btn btn-block btn-action btn-danger"
+                        onClick={doEnd}>OK
+                </button>
             </div>
         </div>
     );

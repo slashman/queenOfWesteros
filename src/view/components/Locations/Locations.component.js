@@ -4,40 +4,20 @@ import './Locations.scss';
 const Locations = ({
     locations = [],
     currentLocation,
-    onLocationChange = (f) => f,
-    onMoveUnits = (f) => f,
-    doNextDay = (f) => f
+    onLocationChange = () => {},
+    onMoveUnits = () => {},
+    doNextDay = () => {}
 }) => {
     let location = locations[currentLocation];
 
-    const prev = (event) => {
-        event.preventDefault();
-        onLocationChange(currentLocation, 'decrease', locations.length);
-    };
-
-    const next = (event) => {
-        event.preventDefault();
-        onLocationChange(currentLocation, 'increase', locations.length);
-    };
-
-    const move = (event) => {
-        event.preventDefault();
-        onMoveUnits(location.id)
-    };
-
-    const nextDay = (event) => {
-        event.preventDefault();
-        doNextDay();
-    }
-
     if (location) {
-        let {name, house, domain} = location;
+        let {name, house, domain, units} = location;
         return (
             <div className="location-view container">
                 <div className="row selector">
                     <div className="col-3">
                         <button className="left btn"
-                                onClick={prev}>
+                                onClick={onLocationChange.bind(null, currentLocation, 'decrease', locations.length)}>
                             ←
                         </button>
                     </div>
@@ -46,7 +26,7 @@ const Locations = ({
                     </div>
                     <div className="col-3">
                         <button className="right btn"
-                                onClick={next}>
+                                onClick={onLocationChange.bind(null, currentLocation, 'increase', locations.length)}>
                             →
                         </button>
                     </div>
@@ -66,7 +46,7 @@ const Locations = ({
                                         <h4>{ house.name }</h4>
                                     </div>
                                     <div className="col-6 domain">
-                                        <h4>{ domain.name }</h4>
+                                        <h4>({ domain.name })</h4>
                                     </div>
                                 </div>
                             </div>
@@ -74,21 +54,12 @@ const Locations = ({
                         : null
                     }
                 </div>
-                <div className="row units">
-                    { (location.units && location.units.length > 0)
-                        ? <UnitsList units={location.units} />
-                        : <div className="col-12">
-                            <div className="alert alert-info" role="alert">
-                                This castle is <strong>empty!</strong> Move units into it to <strong>claim it.</strong>
-                            </div>
-                        </div>
-                    }
-                </div>
+                <UnitsList units={units} />
                 <div className="row actions">
                     { (location.domain && location.domain.name === 'Targaryen')
                         ? (<div className="col">
                             <button className="btn btn-block btn-action btn-danger"
-                                onClick={move}>
+                                onClick={onMoveUnits.bind(null, location.id)}>
                                 Move Troops
                             </button>
                         </div>)
@@ -96,7 +67,7 @@ const Locations = ({
                     }
                     <div className="col">
                         <button className="btn btn-block btn-action btn-danger"
-                            onClick={nextDay}>
+                            onClick={doNextDay}>
                                 Next Day
                         </button>
                     </div>
