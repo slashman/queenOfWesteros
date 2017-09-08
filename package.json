@@ -4,6 +4,8 @@
   "description": "Play as a ruler of westeros",
   "repository": "https://github.com/slashman/queenOfWesteros",
   "scripts": {
+    "watch": "./node_modules/.bin/webpack --progress --watch",
+    "serve": "./node_modules/.bin/httpster -p 3000 -d ./dist",
     "build": "./node_modules/.bin/webpack --progress",
     "prestart": "npm run build",
     "start": "./node_modules/.bin/httpster -p 3000 -d ./dist"
@@ -15,6 +17,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "bootstrap": "^4.0.0-alpha.6",
     "css-loader": "^0.28.7",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",

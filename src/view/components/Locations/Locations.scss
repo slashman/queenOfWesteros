@@ -1,40 +1,29 @@
 .location-view {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 20px;
-    padding-left: 25px;
-    padding-right: 25px;
+    .selector {
+        margin: 20px;
 
-    h1, h2 {
-        font-weight: normal;
-    }
-
-    h1 {
-        margin-bottom: 10px;
-    }
-    .btn, h2 {
-        display: inline-block;
-    }
-
-    .btn {
-        max-width: 150px;
-    }
-
-    .left {
-        margin-right: 10px;
-    }
-    .right {
-        margin-left: 10px;
-    }
-
-    .location {
-        width: 180px;
-        height: 30px;
-        text-align: center;
+        .left {
+            float: right;
+        }
+        .right {
+            float: left;
+        }
+        .location {
+            text-align: center;
+        }
     }
 
     .occupants {
-        min-height: 50px;
+        text-align: center;
+        .house {
+            text-align: right;
+        }
+        .domain {
+            text-align: left;
+        }
+    }
+
+    .actions {
+        text-align: center;
     }
 }
