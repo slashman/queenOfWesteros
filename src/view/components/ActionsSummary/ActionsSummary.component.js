@@ -6,11 +6,7 @@ const ActionsSummary = ({
 }) => {
     return (
         <div className="actions-summary container">
-            <div className="row">
-                <div className="col-12">
-                    <ActionsList actions={actions} />
-                </div>
-            </div>
+            <ActionsList actions={actions} />
             <div className="row actions">
                 <button className="btn btn-block btn-action btn-danger"
                         onClick={doEnd}>OK

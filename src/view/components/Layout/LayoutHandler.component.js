@@ -1,3 +1,6 @@
+import Title from './Title.component.js';
+import Body from './Body.component.js';
+import Layout from './Layout.component.js';
 import Locations from '../Locations/Locations.component.js';
 import MoveUnits from '../Units/MoveUnits.component.js';
 import ActionsSummary from '../ActionsSummary/ActionsSummary.component.js';
@@ -36,20 +39,12 @@ const LayoutHandler = ({
     }
 
     return (
-        <div className="app-container">
-            <div className="row">
-                <div className="col-12">
-                    <h1 className="app-title">{title}</h1>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-sm-2"></div>
-                <div className="col-sm-8">
-                    {targetComponent}
-                </div>
-                <div className="col-sm-2"></div>
-            </div>
-        </div>
+        <Layout>
+            <Title title={title} />
+            <Body>
+                {targetComponent}
+            </Body>
+        </Layout>
     );
 };
 

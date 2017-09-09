@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
-import App from './components/App/App.component.js';
+import App  from './components/App/App.component.js';
 import storeFactory from './store';
 
 const store = storeFactory();
@@ -15,8 +15,3 @@ render(
     </Provider>,
     document.getElementById('react-container')
 );
-
-// render(
-//     <App />,
-//     document.getElementById('react-container')
-// )

@@ -1,6 +1,4 @@
-const Action = ({
-    action
-}) => {
+const Action = ({ action }) => {
     return (
         <li className="action">
             <blockquote className="blockquote">
