@@ -21,19 +21,16 @@ const LayoutHandler = ({
     simulateAttack
 }) => {
     let targetComponent = null,
-        title;
+        title = CONSTANTS.TITLES[view];
     switch (view) {
         case CONSTANTS.VIEWS.SUMMARY:
-            title = "Raven Scrolls";
             targetComponent = <ActionsSummary actions={actionResults} doEnd={doEnd} />
             break;
         case CONSTANTS.VIEWS.UNITS:
-            title = "Move Units";
             targetComponent = <MoveUnits locations={locations} currentLocation={currentLocation} onCancel={onCancel} onUnitsMoved={onMoveUnitsConfirm} simulateAttack={simulateAttack} actions={actionResults}/>
             break;
         case CONSTANTS.VIEWS.LOCATIONS:
         default:
-            title = "Map Room";
             targetComponent = <Locations locations={locations} currentLocation={currentLocation} onLocationChange={onLocationChange} onMoveUnits={onMoveUnits} doNextDay={doNextDay} />
             break;
     }

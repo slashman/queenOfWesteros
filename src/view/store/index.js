@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { currentLocation, locations, view, actionResults } from './reducers.js';
+import * as reducers from './reducers.js';
 import * as model from '../../model/model.js';
 import CONSTANTS from '../constants.js';
 
@@ -23,7 +23,7 @@ const logger = (store) => (next) => (action) => {
 
 const storeFactory = (state = initialState) =>
     applyMiddleware(logger)(createStore)(
-        combineReducers({view, locations, currentLocation, actionResults}),
+        combineReducers({...reducers}),
         initialState
     )
 

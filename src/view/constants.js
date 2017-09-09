@@ -10,6 +10,11 @@ const CONSTANTS = {
         LOCATIONS: "LOCATIONS",
         UNITS: "UNITS",
         SUMMARY: "SUMMARY"
+    },
+    TITLES: {
+        LOCATIONS: 'Map Room',
+        UNITS: "Deploy Units",
+        SUMMARY: "Raven's Scrolls"
     }
 };
 

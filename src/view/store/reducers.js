@@ -25,7 +25,7 @@ export const locations = (state = {}, action) => {
         default:
             return state;
     }
-}
+};
 
 export const view = (state = {}, action) => {
     switch (action.type) {
@@ -43,7 +43,7 @@ export const view = (state = {}, action) => {
         default:
             return CONSTANTS.VIEWS.LOCATIONS;
     }
-}
+};
 
 export const actionResults = (state = [], action) => {
     switch (action.type) {
@@ -54,4 +54,4 @@ export const actionResults = (state = [], action) => {
         default:
             return state;
     }
-}
+};
