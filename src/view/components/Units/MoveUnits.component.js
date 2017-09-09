@@ -11,27 +11,24 @@ export default class MoveUnits extends Component {
         this.props = props;
     }
 
-    componentDidMount(){
-        this.targetChanged();
-    }
-
     get battleData() {
         const { locations, currentLocation } = this.props;
         const location = locations[currentLocation];
         const { units } = location;
+        const refs = this.refs.unitsData.refs;
 
-        let data = {
-            units: units.map((unit, index) => {
-                let ref = `ref-${unit.type.id}`;
-                return {
+        return {
+            units: units.map((unit, index) => ({
                     type: unit.type.id,
-                    q: parseInt(this.refs.unitsData.refs[ref].value, 10)
-                };
-            }).filter((item) => item.q > 0),
+                    q: parseInt(refs[`ref-${unit.type.id}`].value, 10)
+                })).filter((item) => item.q > 0),
             from: location.id,
-            to: this.refs.unitsData.refs.target.value
+            to: refs.target.value
         };
-        return data;
+    }
+
+    componentDidMount(){
+        this.targetChanged();
     }
 
     moveUnits() {
@@ -43,7 +40,7 @@ export default class MoveUnits extends Component {
     }
 
     cancel() {
-        let {onCancel, currentLocation} = this.props;
+        let { onCancel, currentLocation } = this.props;
         onCancel(currentLocation);
     }
 
