@@ -1,5 +1,4 @@
 import {Component} from 'react';
-
 import './MoveUnits.scss';
 
 export default class MoveUnits extends Component {
@@ -13,9 +12,9 @@ export default class MoveUnits extends Component {
     }
 
     getBattleData() {
-        let { locations, currentLocation} = this.props,
+        const { locations, currentLocation } = this.props,
             location = locations[currentLocation],
-            {units} = location,
+            { units } = location,
             data = {};
 
         data.units = units.map((unit, index) => {
@@ -34,19 +33,18 @@ export default class MoveUnits extends Component {
     moveUnits() {
         let {onUnitsMoved} = this.props,
             data = this.getBattleData();
-
         onUnitsMoved(data);
-    }
-
-    cancel() {
-        let {onCancel, currentLocation} = this.props;
-        onCancel(currentLocation);
     }
 
     targetChanged() {
         let {simulateAttack} = this.props,
             data = this.getBattleData();
         simulateAttack(data)
+    }
+
+    cancel() {
+        let {onCancel, currentLocation} = this.props;
+        onCancel(currentLocation);
     }
 
     render() {

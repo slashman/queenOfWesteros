@@ -1,3 +1,4 @@
+- Change default location to last sent units
 - Properly destruct all objects.
 - Isolate into even more components.
 - Add wells to delimit areas

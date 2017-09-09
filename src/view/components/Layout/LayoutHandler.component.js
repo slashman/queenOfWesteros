@@ -28,13 +28,23 @@ const LayoutHandler = (props) => {
             <Body>
                 {{
                     [CONSTANTS.VIEWS.SUMMARY]: (
-                        <ActionsSummary actions={actionResults} doEnd={doEnd} />
+                        <ActionsSummary actions={actionResults}
+                                        doEnd={doEnd} />
                     ),
                     [CONSTANTS.VIEWS.UNITS]: (
-                        <MoveUnits locations={locations} currentLocation={currentLocation} onCancel={onCancel} onUnitsMoved={onMoveUnitsConfirm} simulateAttack={simulateAttack} actions={actionResults}/>
+                        <MoveUnits locations={locations}
+                                    currentLocation={currentLocation}
+                                    onCancel={onCancel}
+                                    onUnitsMoved={onMoveUnitsConfirm}
+                                    simulateAttack={simulateAttack}
+                                    actions={actionResults}/>
                     ),
                     [CONSTANTS.VIEWS.LOCATIONS]: (
-                        <Locations locations={locations} currentLocation={currentLocation} onLocationChange={onLocationChange} onMoveUnits={onMoveUnits} doNextDay={doNextDay} />
+                        <Locations locations={locations}
+                                    currentLocation={currentLocation}
+                                    onLocationChange={onLocationChange}
+                                    onMoveUnits={onMoveUnits}
+                                    doNextDay={doNextDay} />
                     )
                 }[view]}
             </Body>
