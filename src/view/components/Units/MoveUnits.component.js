@@ -15,7 +15,7 @@ export default class MoveUnits extends Component {
         this.targetChanged();
     }
 
-    getBattleData() {
+    get battleData() {
         const { locations, currentLocation } = this.props;
         const location = locations[currentLocation];
         const { units } = location;
@@ -35,11 +35,11 @@ export default class MoveUnits extends Component {
     }
 
     moveUnits() {
-        this.props.onUnitsMoved(this.getBattleData());
+        this.props.onUnitsMoved(this.battleData);
     }
 
     targetChanged() {
-        this.props.simulateAttack(this.getBattleData());
+        this.props.simulateAttack(this.battleData);
     }
 
     cancel() {
