@@ -22,7 +22,6 @@ const Locations = ({
                         </button>
                     </div>
                     <div className="col-6">
-                        <h2 className="location">{ name }</h2>
                     </div>
                     <div className="col-3">
                         <button className="right btn"
@@ -31,7 +30,11 @@ const Locations = ({
                         </button>
                     </div>
                 </div>
-
+                <div className="row selector">
+                    <div className="col-12">
+                        <h2 className="location">{ name }</h2>
+                    </div>
+                </div>
                 <div className="row occupants">
                     {(house || domain)
                         ? (

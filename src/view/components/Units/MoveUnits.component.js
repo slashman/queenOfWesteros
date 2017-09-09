@@ -103,7 +103,7 @@ export default class MoveUnits extends Component {
                         <div className="col">
                             <button className="btn btn-block btn-action btn-danger"
                                     onClick={this.cancel.bind(this)}>
-                                cancel
+                                Cancel
                             </button>
                         </div>
                     </div>
