@@ -1,5 +1,9 @@
 import {Component} from 'react';
+import ScrollsList from '../ScrollSummary/ScrollsList.component.js';
+import UnitsForm from './UnitsForm.component.js';
+
 import './MoveUnits.scss';
+
 
 export default class MoveUnits extends Component {
     constructor(props) {
@@ -12,34 +16,30 @@ export default class MoveUnits extends Component {
     }
 
     getBattleData() {
-        const { locations, currentLocation } = this.props,
-            location = locations[currentLocation],
-            { units } = location,
-            data = {};
+        const { locations, currentLocation } = this.props;
+        const location = locations[currentLocation];
+        const { units } = location;
 
-        data.units = units.map((unit, index) => {
-            let ref = `ref-${unit.type.id}`;
-            return {
-                type: unit.type.id,
-                q: parseInt(this.refs[ref].value, 10)
-            };
-        }).filter((item) => item.q > 0);
-        data.from = location.id,
-        data.to = this.refs.target.value;
-
+        let data = {
+            units: units.map((unit, index) => {
+                let ref = `ref-${unit.type.id}`;
+                return {
+                    type: unit.type.id,
+                    q: parseInt(this.refs.unitsData.refs[ref].value, 10)
+                };
+            }).filter((item) => item.q > 0),
+            from: location.id,
+            to: this.refs.unitsData.refs.target.value
+        };
         return data;
     }
 
     moveUnits() {
-        let {onUnitsMoved} = this.props,
-            data = this.getBattleData();
-        onUnitsMoved(data);
+        this.props.onUnitsMoved(this.getBattleData());
     }
 
     targetChanged() {
-        let {simulateAttack} = this.props,
-            data = this.getBattleData();
-        simulateAttack(data)
+        this.props.simulateAttack(this.getBattleData());
     }
 
     cancel() {
@@ -48,70 +48,37 @@ export default class MoveUnits extends Component {
     }
 
     render() {
-        let {locations, currentLocation, actions} = this.props,
-            location = locations[currentLocation],
-            availableLocations = locations.filter((location, index) => index !== currentLocation),
-            {units} = location,
-            renderTarget = null;
+        const { locations, currentLocation, actions } = this.props;
+        const location = locations[currentLocation];
+        const {units} = location;
+        const targetChanged = this.targetChanged.bind(this);
+        let scrollActions = actions.map(({planDescription, days}) => {
+                return `${planDescription} will take ${days} days`
+            });
 
-        if (location) {
-            renderTarget = (
-                <div className="move-units container">
-                    <div className="row">
-                        <div className="col-12">
-                            <form noValidate>
-                                {units.map((unit, index) =>
-                                    <div className="form-group" key={unit.type.id}>
-                                        <label htmlFor={unit.type.id}>
-                                            <strong>{unit.type.name}</strong> ({unit.type.type})
-                                        </label>
-                                        <input type="text" className="form-control" defaultValue={unit.aq} ref={`ref-${unit.type.id}`} id={unit.type.id} />
-                                    </div>
-                                )}
-                                <div className="form-group">
-                                    <label htmlFor="target">Target</label>
-                                    <select className="form-control" ref='target' id="target" onChange={this.targetChanged.bind(this)}>
-                                        { availableLocations.map((location, index) =>
-                                            <option key={index} value={location.id}>{location.name}</option>
-                                        )}
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
+        return (
+            <div className="move-units container">
+                <UnitsForm ref="unitsData"
+                            units={units}
+                            locations={locations}
+                            currentLocation={currentLocation}
+                            targetChanged={targetChanged} />
+                <ScrollsList scrolls={scrollActions} />
+                <div className="row actions">
+                    <div className="col">
+                        <button className="btn btn-block btn-action btn-danger"
+                                onClick={this.moveUnits.bind(this)}>
+                            Ok
+                        </button>
                     </div>
-                    <div className="row">
-                        <div className="col-12">
-                            <ul className="list-unstyled">
-                                { (actions && actions.length > 0)
-                                    ? actions.map((action, index) =>
-                                        <li className="action" key={index}>
-                                            <blockquote className="blockquote">
-                                                <p>{action.planDescription}</p>
-                                                <footer>Estimated days: {action.days}</footer>
-                                            </blockquote>
-                                        </li>)
-                                    : null
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="row actions">
-                        <div className="col">
-                            <button className="btn btn-block btn-action btn-danger"
-                                    onClick={this.moveUnits.bind(this)}>
-                                Ok
-                            </button>
-                        </div>
-                        <div className="col">
-                            <button className="btn btn-block btn-action btn-danger"
-                                    onClick={this.cancel.bind(this)}>
-                                Cancel
-                            </button>
-                        </div>
+                    <div className="col">
+                        <button className="btn btn-block btn-action btn-danger"
+                                onClick={this.cancel.bind(this)}>
+                            Cancel
+                        </button>
                     </div>
                 </div>
-            );
-        }
-        return renderTarget;
+            </div>
+        );
     }
 }
