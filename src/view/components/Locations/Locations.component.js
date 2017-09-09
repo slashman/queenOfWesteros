@@ -1,58 +1,27 @@
 import UnitsList from '../Units/UnitsList.component.js';
+import LocationSelector from './LocationSelector.component.js';
+import LocationOccupants from './LocationOccupants.component.js';
 import './Locations.scss';
 
-const Locations = ({
-    locations = [],
-    currentLocation,
-    onLocationChange = () => {},
-    onMoveUnits = () => {},
-    doNextDay = () => {}
-}) => {
-    let location = locations[currentLocation];
+const Locations = (props) => {
+    const {
+            locations = [],
+            currentLocation,
+            onLocationChange = () => {},
+            onMoveUnits = () => {},
+            doNextDay = () => {}
+        } = props,
+        location = locations[currentLocation];
 
     if (location) {
         let {name, house, domain, units} = location;
         return (
             <div className="location-view container">
-                <div className="row selector">
-                    <div className="col-1">
-                        <button className="left btn"
-                                onClick={onLocationChange.bind(null, currentLocation, 'decrease', locations.length)}>
-                            ←
-                        </button>
-                    </div>
-                    <div className="col-9">
-                        <h2 className="location">{ name }</h2>
-                    </div>
-                    <div className="col-1">
-                        <button className="right btn"
-                                onClick={onLocationChange.bind(null, currentLocation, 'increase', locations.length)}>
-                            →
-                        </button>
-                    </div>
-                </div>
-                <div className="row occupants">
-                    {(house || domain)
-                        ? (
-                            <div className="col-12">
-                                <div className="row">
-                                    <div className="col-12">
-                                        <label>Occupied by:</label>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-6 house">
-                                        <h4>{ house.name }</h4>
-                                    </div>
-                                    <div className="col-6 domain">
-                                        <h4>({ domain.name })</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                        : null
-                    }
-                </div>
+                <LocationSelector onLocationChange={onLocationChange}
+                                    currentLocation={currentLocation}
+                                    locations={locations}
+                                    name={name}/>
+                <LocationOccupants house={house} domain={domain} />
                 <UnitsList units={units} />
                 <div className="row actions">
                     { (location.domain && location.domain.name === 'Targaryen')

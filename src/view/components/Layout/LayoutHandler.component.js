@@ -1,6 +1,5 @@
 import Title from './Title.component.js';
 import Body from './Body.component.js';
-import Footer from './Footer.component.js';
 import Layout from './Layout.component.js';
 import Locations from '../Locations/Locations.component.js';
 import MoveUnits from '../Units/MoveUnits.component.js';
