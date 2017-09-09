@@ -8,6 +8,10 @@ export default class MoveUnits extends Component {
         this.props = props;
     }
 
+    componentDidMount(){
+        this.targetChanged();
+    }
+
     getBattleData() {
         let { locations, currentLocation} = this.props,
             location = locations[currentLocation],

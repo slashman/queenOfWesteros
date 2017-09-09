@@ -15,24 +15,20 @@ const Locations = ({
         return (
             <div className="location-view container">
                 <div className="row selector">
-                    <div className="col-3">
+                    <div className="col-1">
                         <button className="left btn"
                                 onClick={onLocationChange.bind(null, currentLocation, 'decrease', locations.length)}>
                             ←
                         </button>
                     </div>
-                    <div className="col-6">
+                    <div className="col-9">
+                        <h2 className="location">{ name }</h2>
                     </div>
-                    <div className="col-3">
+                    <div className="col-1">
                         <button className="right btn"
                                 onClick={onLocationChange.bind(null, currentLocation, 'increase', locations.length)}>
                             →
                         </button>
-                    </div>
-                </div>
-                <div className="row selector">
-                    <div className="col-12">
-                        <h2 className="location">{ name }</h2>
                     </div>
                 </div>
                 <div className="row occupants">

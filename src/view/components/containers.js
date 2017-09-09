@@ -5,7 +5,7 @@ import LayoutHandler from './LayoutHandler/LayoutHandler.component.js';
 
 
 export const ViewHandlerComponent = connect(
-    ({view, locations, currentLocation, actionResults}) => {
+    ({view, locations, currentLocation, actionResults}) => { //mapStateToProps
         return {
             view,
             locations: [...locations],
@@ -34,7 +34,6 @@ export const ViewHandlerComponent = connect(
                 dispatch(endTick())
             },
             simulateAttack(data) {
-                console.log("attacl");
                 dispatch(simulateAttack(data));
             }
         };

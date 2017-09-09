@@ -48,7 +48,6 @@ export const view = (state = {}, action) => {
 export const actionResults = (state = [], action) => {
     switch (action.type) {
         case CONSTANTS.SIMULATE_ATTACK:
-            console.log("Action:", action);
             return [ action.results];
         case CONSTANTS.NEXT_DAY:
             return [...action.results];
