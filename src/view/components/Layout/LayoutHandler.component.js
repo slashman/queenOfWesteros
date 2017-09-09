@@ -1,9 +1,10 @@
 import Title from './Title.component.js';
 import Body from './Body.component.js';
+import Footer from './Footer.component.js';
 import Layout from './Layout.component.js';
 import Locations from '../Locations/Locations.component.js';
 import MoveUnits from '../Units/MoveUnits.component.js';
-import ActionsSummary from '../ActionsSummary/ActionsSummary.component.js';
+import ScrollSummary from '../ScrollSummary/ScrollSummary.component.js';
 import CONSTANTS from '../../constants.js';
 import './Layout.scss';
 
@@ -28,7 +29,7 @@ const LayoutHandler = (props) => {
             <Body>
                 {{
                     [CONSTANTS.VIEWS.SUMMARY]: (
-                        <ActionsSummary actions={actionResults}
+                        <ScrollSummary scrolls={actionResults}
                                         doEnd={doEnd} />
                     ),
                     [CONSTANTS.VIEWS.UNITS]: (
