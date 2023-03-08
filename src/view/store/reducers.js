@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createReducer, createSlice } from "@reduxjs/toolkit";
 
 import CONSTANTS from "../constants.js";
 import * as model from "../../model/model.js";
@@ -18,26 +18,21 @@ export const currentLocation = (state = {}, action) => {
   }
 };
 
-export const locations = (state = {}, action) => {
-  switch (action.type) {
-    case CONSTANTS.MOVE_UNITS_CONFIRM:
-      debugger;
-      const { data } = action;
-      const { from, to, units } = data;
-      const actionData = {
-        type: CONSTANTS.MOVE_TROOPS,
-        from: from || "DRAGONSTONE",
-        to: to || "CASTERLY_ROCK",
-        units: [...units],
-      };
-      model.scheduleAction(actionData);
+export const locations = createReducer([...model.getKnownLocationInfo()], (builder) => {
+  builder.addCase(CONSTANTS.MOVE_UNITS_CONFIRM, (state, action) => {
+    const { data } = action;
+    const { from, to, units } = data;
+    const actionData = {
+      type: CONSTANTS.MOVE_TROOPS,
+      from: from || "DRAGONSTONE",
+      to: to || "CASTERLY_ROCK",
+      units: [...units],
+    };
+    model.scheduleAction(actionData);
 
-      return [...model.getKnownLocationInfo()];
-
-    default:
-      return state;
-  }
-};
+    return [...model.getKnownLocationInfo()];
+  });
+});
 
 export const view = (state = {}, action) => {
   switch (action.type) {

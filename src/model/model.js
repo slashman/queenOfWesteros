@@ -22,7 +22,9 @@ const model = {
   getKnownLocationInfo: function () {
     //TODO: In the future, calculate "known info" based on previously known info+spies
     if (!knownInfo) this.startDay();
-    return [...knownInfo];
+    // Return copies (in-depth) of the locations and their units so that redux doesn't complain about immutability
+    // later on when modifying the values of these locations.
+    return JSON.parse(JSON.stringify(knownInfo));
   },
   planAction: function (a) {
     this.validateAction(a);
